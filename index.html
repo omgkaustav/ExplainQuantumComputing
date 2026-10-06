@@ -800,29 +800,40 @@
             <div class="ket-guide-card">
               <div class="ket-guide-title">
                 <span>✦ <strong>Normalized Amplitudes $\to$ Probabilities ($|c|^2$):</strong></span>
-                <span class="guide-sum-tag">Total Probability $= 100\%$ ($1,024$ runs)</span>
+                <span class="guide-sum-tag" id="ketGuideSumTag">Total Probability $= 100\%$ (8,192 runs)</span>
               </div>
               <div class="ket-guide-grid">
                 <div class="guide-cell">
                   <span class="guide-state">|000⟩, |001⟩</span>
                   <span class="guide-calc">$|\pm\tfrac{1}{2}|^2 = \tfrac{1}{4}$</span>
-                  <span class="guide-pct">25.0% <small>(256 runs)</small></span>
+                  <span class="guide-pct" id="guideCellPct1">25.0% <small>(2,048 runs)</small></span>
                 </div>
                 <div class="guide-cell highlight">
                   <span class="guide-state">|010⟩ <span class="complex-tag">Complex</span></span>
                   <span class="guide-calc">$|\tfrac{1}{4} + \tfrac{1}{4}i|^2 = \tfrac{2}{16} = \tfrac{1}{8}$</span>
-                  <span class="guide-pct">12.5% <small>(128 runs)</small></span>
+                  <span class="guide-pct" id="guideCellPct2">12.5% <small>(1,024 runs)</small></span>
                 </div>
                 <div class="guide-cell">
                   <span class="guide-state">|011⟩</span>
                   <span class="guide-calc">$|\tfrac{1}{\sqrt{8}}|^2 = \tfrac{1}{8}$</span>
-                  <span class="guide-pct">12.5% <small>(128 runs)</small></span>
+                  <span class="guide-pct" id="guideCellPct3">12.5% <small>(1,024 runs)</small></span>
                 </div>
                 <div class="guide-cell">
                   <span class="guide-state">|100⟩, |101⟩, |110⟩, |111⟩</span>
                   <span class="guide-calc">$|\pm\tfrac{1}{4}|^2 = |\tfrac{i}{4}|^2 = \tfrac{1}{16}$</span>
-                  <span class="guide-pct">6.25% <small>(64 runs each)</small></span>
+                  <span class="guide-pct" id="guideCellPct4">6.25% <small>(512 runs each)</small></span>
                 </div>
+              </div>
+            </div>
+
+            <!-- Repetitions (Shots) Selector -->
+            <div class="ket-shots-selector-bar">
+              <span class="shots-selector-title">🎲 <strong>Repetitions (Shots):</strong></span>
+              <div class="shots-pills-row" id="ketShotsPills">
+                <button type="button" class="shot-pill" data-shots="1024">1,024 <small>(Fast)</small></button>
+                <button type="button" class="shot-pill" data-shots="4096">4,096 <small>(High-res)</small></button>
+                <button type="button" class="shot-pill active" data-shots="8192">8,192 <small>★ Recommended</small></button>
+                <button type="button" class="shot-pill" data-shots="16384">16,384 <small>(Ultra-exact)</small></button>
               </div>
             </div>
 
@@ -832,7 +843,8 @@
             </div>
 
             <div class="collapse-action-row">
-              <button class="cute-btn primary" id="btnKetMeasure">⚡ Measure State (Repeat 1,024 Times) ➔</button>
+              <button class="cute-btn primary" id="btnKetMeasure">⚡ Measure State (Repeat 8,192 Times) ➔</button>
+              <button class="cute-btn success-btn" id="btnKetAccumulate" style="display:none;">➕ Accumulate +8,192 More Runs</button>
               <button class="cute-btn neutral" id="btnKetReset" style="display:none;">Prepare Superposition Again ↺</button>
               <button class="cute-btn ghost-btn" id="btnKetEngineToggle">⚙️ Engine Settings</button>
             </div>
@@ -840,11 +852,16 @@
             <!-- Single Physical Collapsed Outcome Card -->
             <div class="collapse-receipt-card" id="collapseReceipt" style="display:none;"></div>
 
-            <!-- Frequency table from repeating preparation and measurement 1,024 times -->
+            <!-- Frequency table from repeating preparation and measurement -->
             <div class="ket-histogram-wrap" id="ketHistogramWrap" style="display:none;">
               <div class="histogram-head">
-                <span class="hist-title">📊 Frequency Table of Outcomes (1,024 Runs)</span>
-                <span class="hist-sub">If you prepare this quantum state and measure it, then prepare the exact same state again and measure it, and repeat this cycle a total of 1,024 times, this is the frequency table you get:</span>
+                <div class="hist-head-left">
+                  <span class="hist-title" id="ketHistTitle">📊 Frequency Table of Outcomes (8,192 Runs)</span>
+                  <span class="hist-sub">Observing repeated measurement collapses. Notice how closely the empirical frequencies converge to $|c|^2$ as repetitions increase!</span>
+                </div>
+                <div class="fidelity-badge-wrap" id="ketFidelityBadge">
+                  <span class="fidelity-pill">🎯 State Fidelity: <strong id="ketFidelityVal">99.8%</strong></span>
+                </div>
               </div>
               <div class="ket-bars-row" id="ketBarsRow"></div>
               <div class="hist-receipt-meta" id="ketReceiptMeta"></div>

@@ -2781,6 +2781,79 @@ body.paper-theme {
   border-color: #94a3b8;
 }
 
+.cute-btn.success-btn {
+  background: #059669;
+  color: #ffffff;
+  border: 1.5px solid #047857;
+}
+
+.cute-btn.success-btn:hover {
+  background: #047857;
+}
+
+/* Repetition / Shots Selector on Slide 14 */
+.ket-shots-selector-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1.5px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 8px 14px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.shots-selector-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.shots-pills-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.shot-pill {
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
+  color: #475569;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.shot-pill:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.shot-pill.active {
+  background: #0284c7;
+  border-color: #0284c7;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.35);
+}
+
+.shot-pill.active small {
+  color: #bae6fd;
+}
+
+.shot-pill small {
+  font-size: 0.7rem;
+  opacity: 0.85;
+}
+
 .ket-histogram-wrap {
   width: 100%;
   background: #ffffff;
@@ -2795,8 +2868,36 @@ body.paper-theme {
 
 .histogram-head {
   display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hist-head-left {
+  display: flex;
   flex-direction: column;
   gap: 2px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.fidelity-badge-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.fidelity-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: #ecfdf5;
+  border: 1.5px solid #a7f3d0;
+  color: #065f46;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: 20px;
 }
 
 .hist-title {

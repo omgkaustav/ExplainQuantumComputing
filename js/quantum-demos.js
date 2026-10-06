@@ -226,21 +226,30 @@ window.initEntanglementLab = function() {
 
 
 // ========================================================
-// Slide 14: Ket Superposition Collapse (3 Qubits x 1024 Shots)
+// Slide 14: Ket Superposition Collapse (Multi-shot & Accumulation)
 // ========================================================
 window.initKetCollapse = function() {
   const btnMeasure = document.getElementById('btnKetMeasure');
+  const btnAccumulate = document.getElementById('btnKetAccumulate');
   const btnReset = document.getElementById('btnKetReset');
   const btnEngineToggle = document.getElementById('btnKetEngineToggle');
   const ketDisplay = document.getElementById('ketStateDisplay');
   const collapseResult = document.getElementById('collapseReceipt');
   const histWrap = document.getElementById('ketHistogramWrap');
+  const histTitle = document.getElementById('ketHistTitle');
+  const fidelityVal = document.getElementById('ketFidelityVal');
   const barsRow = document.getElementById('ketBarsRow');
   const receiptMeta = document.getElementById('ketReceiptMeta');
   const statusDot = document.getElementById('ketStatusDot');
   const statusText = document.getElementById('ketStatusText');
+  const shotsPillsContainer = document.getElementById('ketShotsPills');
 
   if (!btnMeasure || !ketDisplay) return;
+
+  let currentShots = 8192;
+  let accumulatedCounts = {};
+  let accumulatedShots = 0;
+  let lastBackend = 'Local Quantum Sim';
 
   function updateKetStatus(text, inProgress = false) {
     if (!statusText) return;
@@ -267,15 +276,60 @@ window.initKetCollapse = function() {
 
   window.refreshKetStatus = () => updateKetStatus();
 
+  function updateGuideCard(shots) {
+    const s = Number(shots) || currentShots;
+    const guideSumTag = document.getElementById('ketGuideSumTag');
+    const cell1 = document.getElementById('guideCellPct1');
+    const cell2 = document.getElementById('guideCellPct2');
+    const cell3 = document.getElementById('guideCellPct3');
+    const cell4 = document.getElementById('guideCellPct4');
+
+    if (guideSumTag) {
+      guideSumTag.innerHTML = `Total Probability $= 100\%$ (${s.toLocaleString()} runs)`;
+    }
+    if (cell1) {
+      cell1.innerHTML = `25.0% <small>(${Math.round(s * 0.25).toLocaleString()} runs)</small>`;
+    }
+    if (cell2) {
+      cell2.innerHTML = `12.5% <small>(${Math.round(s * 0.125).toLocaleString()} runs)</small>`;
+    }
+    if (cell3) {
+      cell3.innerHTML = `12.5% <small>(${Math.round(s * 0.125).toLocaleString()} runs)</small>`;
+    }
+    if (cell4) {
+      cell4.innerHTML = `6.25% <small>(${Math.round(s * 0.0625).toLocaleString()} runs each)</small>`;
+    }
+  }
+
+  // Hook up shot selection pills
+  if (shotsPillsContainer) {
+    const pills = shotsPillsContainer.querySelectorAll('.shot-pill');
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentShots = parseInt(pill.dataset.shots, 10) || 8192;
+
+        if (btnMeasure) {
+          btnMeasure.textContent = `⚡ Measure State (Repeat ${currentShots.toLocaleString()} Times) ➔`;
+        }
+        if (btnAccumulate) {
+          btnAccumulate.textContent = `➕ Accumulate +${currentShots.toLocaleString()} More Runs`;
+        }
+        updateGuideCard(accumulatedShots > 0 ? accumulatedShots : currentShots);
+      });
+    });
+  }
+
   const THEORETICAL_3Q = {
-    '000': { pct: 25.0, runs: 256, amp: '1/2' },
-    '001': { pct: 25.0, runs: 256, amp: '-1/2' },
-    '010': { pct: 12.5, runs: 128, amp: '1/4 + 1/4i' },
-    '011': { pct: 12.5, runs: 128, amp: '1/√8' },
-    '100': { pct: 6.25, runs: 64, amp: '1/4' },
-    '101': { pct: 6.25, runs: 64, amp: '-1/4' },
-    '110': { pct: 6.25, runs: 64, amp: 'i/4' },
-    '111': { pct: 6.25, runs: 64, amp: '1/4' }
+    '000': { pct: 25.0, frac: 0.25, amp: '1/2' },
+    '001': { pct: 25.0, frac: 0.25, amp: '-1/2' },
+    '010': { pct: 12.5, frac: 0.125, amp: '1/4 + 1/4i' },
+    '011': { pct: 12.5, frac: 0.125, amp: '1/√8' },
+    '100': { pct: 6.25, frac: 0.0625, amp: '1/4' },
+    '101': { pct: 6.25, frac: 0.0625, amp: '-1/4' },
+    '110': { pct: 6.25, frac: 0.0625, amp: 'i/4' },
+    '111': { pct: 6.25, frac: 0.0625, amp: '1/4' }
   };
 
   function render8Bars(counts, shots, targetBitstring) {
@@ -290,17 +344,18 @@ window.initKetCollapse = function() {
       const pct = (count / shots) * 100;
       const heightPx = Math.max(8, (count / maxVal) * 95);
       const isTarget = (s === targetBitstring);
-      const theo = THEORETICAL_3Q[s] || { pct: 12.5, runs: 128 };
+      const theo = THEORETICAL_3Q[s] || { pct: 12.5, frac: 0.125 };
+      const expectedRuns = Math.round(shots * theo.frac);
 
       const item = document.createElement('div');
       item.className = 'ket-bar-item' + (isTarget ? ' collapsed-target' : '');
-      item.title = `State |${s}⟩: Observed ${count} / ${shots} (${pct.toFixed(2)}%), Expected ${theo.runs} (${theo.pct}%)`;
+      item.title = `State |${s}⟩: Observed ${count.toLocaleString()} / ${shots.toLocaleString()} (${pct.toFixed(2)}%), Expected ${expectedRuns.toLocaleString()} (${theo.pct}%)`;
 
       const countLabel = document.createElement('div');
       countLabel.className = 'ket-bar-count';
       countLabel.innerHTML = `
         <span class="bar-obs-pct">${pct.toFixed(1)}%</span>
-        <span class="bar-obs-runs">${count}</span>
+        <span class="bar-obs-runs">${count.toLocaleString()}</span>
       `;
 
       const barFill = document.createElement('div');
@@ -321,22 +376,40 @@ window.initKetCollapse = function() {
     });
   }
 
+  function calcFidelity(counts, shots) {
+    if (typeof window.computeStateFidelity === 'function') {
+      return window.computeStateFidelity(counts, shots);
+    }
+    let sum = 0;
+    const n = Math.max(1, shots);
+    for (const [k, theo] of Object.entries(THEORETICAL_3Q)) {
+      const obs = (counts[k] || 0) / n;
+      sum += Math.sqrt(obs * theo.frac);
+    }
+    return Math.min(1.0, sum);
+  }
+
   async function handleMeasure() {
     btnMeasure.disabled = true;
-    btnMeasure.textContent = 'Measuring State... ⏳';
-    updateKetStatus('Sending measurement operator to quantum engine...', true);
+    btnMeasure.textContent = `Measuring State (${currentShots.toLocaleString()} Runs)... ⏳`;
+    updateKetStatus(`Submitting ${currentShots.toLocaleString()} measurement repetitions to quantum engine...`, true);
 
     try {
       const client = window.mothAtlasClient;
       let res;
 
       if (client) {
-        res = await client.run3QubitCollapse(1024, (msg) => {
+        res = await client.run3QubitCollapse(currentShots, (msg) => {
           updateKetStatus(msg, true);
         });
       } else {
-        res = window.simulate3QubitSuperposition(1024);
+        res = window.simulate3QubitSuperposition(currentShots);
       }
+
+      // Initialize accumulated state
+      accumulatedCounts = { ...res.counts };
+      accumulatedShots = res.shots;
+      lastBackend = res.source === 'atlas' ? `Moth Atlas (${res.mode.toUpperCase()})` : 'Local Quantum Sim';
 
       // 1. Fade the superposition formula
       ketDisplay.classList.add('collapsed-faded');
@@ -348,36 +421,56 @@ window.initKetCollapse = function() {
           <span class="receipt-icon">🧾</span>
           <div>
             <div>Measurement Collapse: <strong style="color: #15803d; font-size: 1.25rem;">|${res.collapsedBitstring}⟩</strong></div>
-            <div class="receipt-note">Measuring once collapsed the entire superposition into this single classical outcome!</div>
+            <div class="receipt-note">Measuring once physically collapsed the entire superposition into |${res.collapsedBitstring}⟩! Below is the frequency distribution over ${accumulatedShots.toLocaleString()} repeated runs.</div>
           </div>
         `;
       }
 
-      // 3. Render 1024-shot histogram
+      // 3. Render histogram
       if (histWrap) {
         histWrap.style.display = 'flex';
-        render8Bars(res.counts, res.shots, res.collapsedBitstring);
+        render8Bars(accumulatedCounts, accumulatedShots, res.collapsedBitstring);
       }
 
-      // 4. Metadata footer
+      if (histTitle) {
+        histTitle.textContent = `📊 Frequency Table of Outcomes (${accumulatedShots.toLocaleString()} Runs)`;
+      }
+
+      // 4. Update Fidelity badge
+      const fidelity = calcFidelity(accumulatedCounts, accumulatedShots);
+      if (fidelityVal) {
+        fidelityVal.textContent = `${(fidelity * 100).toFixed(2)}%`;
+      }
+
+      // 5. Metadata footer
       if (receiptMeta) {
-        const modeLabel = res.source === 'atlas' ? `Moth Atlas (${res.mode.toUpperCase()})` : 'Local Quantum Sim';
         receiptMeta.innerHTML = `
-          <span>⚡ <strong>Backend:</strong> ${modeLabel}</span>
-          <span>🎯 <strong>Repetitions:</strong> 1,024 runs</span>
+          <span>⚡ <strong>Backend:</strong> ${lastBackend}</span>
+          <span>🎯 <strong>Total Repetitions:</strong> ${accumulatedShots.toLocaleString()} runs</span>
+          <span>🎯 <strong>State Fidelity:</strong> ${(fidelity * 100).toFixed(2)}%</span>
           <span>🏷️ <strong>Job ID:</strong> ${res.jobId}</span>
           <span>👑 <strong>Dominant Term:</strong> |${res.dominantBitstring}⟩</span>
         `;
       }
 
-      updateKetStatus(`Measurement complete! Collapsed into |${res.collapsedBitstring}⟩.`);
+      updateGuideCard(accumulatedShots);
+      updateKetStatus(`Measurement complete! Collapsed into |${res.collapsedBitstring}⟩ with ${(fidelity * 100).toFixed(2)}% fidelity.`);
 
+      // Update button visibility
       btnMeasure.style.display = 'none';
+      if (btnAccumulate) {
+        btnAccumulate.style.display = 'inline-flex';
+        btnAccumulate.textContent = `➕ Accumulate +${currentShots.toLocaleString()} More Runs`;
+      }
       if (btnReset) btnReset.style.display = 'inline-flex';
     } catch (err) {
       console.error('Slide 14 collapse error:', err);
       updateKetStatus(`Error measuring: ${err.message}. Showing local simulator fallback.`);
-      const sim = window.simulate3QubitSuperposition(1024);
+      const sim = window.simulate3QubitSuperposition(currentShots);
+      accumulatedCounts = { ...sim.counts };
+      accumulatedShots = sim.shots;
+      lastBackend = 'Local Quantum Sim (Fallback)';
+
       ketDisplay.classList.add('collapsed-faded');
       if (collapseResult) {
         collapseResult.style.display = 'flex';
@@ -385,24 +478,107 @@ window.initKetCollapse = function() {
       }
       if (histWrap) {
         histWrap.style.display = 'flex';
-        render8Bars(sim.counts, 1024, sim.collapsedBitstring);
+        render8Bars(accumulatedCounts, accumulatedShots, sim.collapsedBitstring);
       }
+      if (histTitle) {
+        histTitle.textContent = `📊 Frequency Table of Outcomes (${accumulatedShots.toLocaleString()} Runs)`;
+      }
+      const fidelity = calcFidelity(accumulatedCounts, accumulatedShots);
+      if (fidelityVal) {
+        fidelityVal.textContent = `${(fidelity * 100).toFixed(2)}%`;
+      }
+
       btnMeasure.style.display = 'none';
+      if (btnAccumulate) {
+        btnAccumulate.style.display = 'inline-flex';
+        btnAccumulate.textContent = `➕ Accumulate +${currentShots.toLocaleString()} More Runs`;
+      }
       if (btnReset) btnReset.style.display = 'inline-flex';
     } finally {
       btnMeasure.disabled = false;
-      btnMeasure.textContent = '⚡ Measure State (Repeat 1,024 Times) ➔';
+      btnMeasure.textContent = `⚡ Measure State (Repeat ${currentShots.toLocaleString()} Times) ➔`;
+    }
+  }
+
+  async function handleAccumulate() {
+    if (!btnAccumulate) return;
+    btnAccumulate.disabled = true;
+    btnAccumulate.textContent = `Adding +${currentShots.toLocaleString()} Runs... ⏳`;
+    updateKetStatus(`Executing additional ${currentShots.toLocaleString()} runs to converge statistics...`, true);
+
+    try {
+      const client = window.mothAtlasClient;
+      let res;
+
+      if (client) {
+        res = await client.run3QubitCollapse(currentShots, (msg) => {
+          updateKetStatus(msg, true);
+        });
+      } else {
+        res = window.simulate3QubitSuperposition(currentShots);
+      }
+
+      // Merge counts
+      for (const [k, v] of Object.entries(res.counts)) {
+        accumulatedCounts[k] = (accumulatedCounts[k] || 0) + v;
+      }
+      accumulatedShots += res.shots;
+
+      if (collapseResult) {
+        collapseResult.innerHTML = `
+          <span class="receipt-icon">🧾</span>
+          <div>
+            <div>Latest Collapse: <strong style="color: #15803d; font-size: 1.25rem;">|${res.collapsedBitstring}⟩</strong> &bull; Total runs: <strong>${accumulatedShots.toLocaleString()}</strong></div>
+            <div class="receipt-note">Accumulated ${res.shots.toLocaleString()} more runs! Statistical variance continues to decrease toward theoretical $|c|^2$.</div>
+          </div>
+        `;
+      }
+
+      render8Bars(accumulatedCounts, accumulatedShots, res.collapsedBitstring);
+
+      if (histTitle) {
+        histTitle.textContent = `📊 Frequency Table of Outcomes (${accumulatedShots.toLocaleString()} Runs Accumulated)`;
+      }
+
+      const fidelity = calcFidelity(accumulatedCounts, accumulatedShots);
+      if (fidelityVal) {
+        fidelityVal.textContent = `${(fidelity * 100).toFixed(2)}%`;
+      }
+
+      if (receiptMeta) {
+        receiptMeta.innerHTML = `
+          <span>⚡ <strong>Backend:</strong> ${lastBackend}</span>
+          <span>🎯 <strong>Total Repetitions:</strong> ${accumulatedShots.toLocaleString()} runs</span>
+          <span>🎯 <strong>State Fidelity:</strong> ${(fidelity * 100).toFixed(2)}%</span>
+          <span>🏷️ <strong>Latest Job ID:</strong> ${res.jobId}</span>
+          <span>👑 <strong>Dominant Term:</strong> |${res.dominantBitstring}⟩</span>
+        `;
+      }
+
+      updateGuideCard(accumulatedShots);
+      updateKetStatus(`Accumulated ${accumulatedShots.toLocaleString()} total runs! Fidelity: ${(fidelity * 100).toFixed(2)}%.`);
+    } catch (err) {
+      console.error('Slide 14 accumulation error:', err);
+      updateKetStatus(`Error accumulating runs: ${err.message}`);
+    } finally {
+      btnAccumulate.disabled = false;
+      btnAccumulate.textContent = `➕ Accumulate +${currentShots.toLocaleString()} More Runs`;
     }
   }
 
   btnMeasure.addEventListener('click', handleMeasure);
+  btnAccumulate?.addEventListener('click', handleAccumulate);
 
   btnReset?.addEventListener('click', () => {
     ketDisplay.classList.remove('collapsed-faded');
     if (collapseResult) collapseResult.style.display = 'none';
     if (histWrap) histWrap.style.display = 'none';
+    if (btnAccumulate) btnAccumulate.style.display = 'none';
     btnMeasure.style.display = 'inline-flex';
     btnReset.style.display = 'none';
+    accumulatedCounts = {};
+    accumulatedShots = 0;
+    updateGuideCard(currentShots);
     updateKetStatus();
   });
 
@@ -424,6 +600,7 @@ window.initKetCollapse = function() {
     } catch (_) {}
   }
 
+  updateGuideCard(currentShots);
   updateKetStatus();
 };
 

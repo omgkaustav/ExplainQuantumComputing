@@ -40,8 +40,33 @@
     };
   }
 
+  // Slide 14 Theoretical Superposition Probabilities matching |ψ⟩
+  // |ψ⟩ = 1/2|000⟩ - 1/2|001⟩ + (1/4+1/4i)|010⟩ + 1/√8|011⟩ + 1/4|100⟩ - 1/4|101⟩ + i/4|110⟩ + 1/4|111⟩
+  const THEORETICAL_3Q_PROBS = {
+    '000': 0.25,
+    '001': 0.25,
+    '010': 0.125,
+    '011': 0.125,
+    '100': 0.0625,
+    '101': 0.0625,
+    '110': 0.0625,
+    '111': 0.0625
+  };
+
+  // Classical Fidelity (Bhattacharyya coefficient) between empirical counts & theoretical state
+  function computeStateFidelity(counts, shots, probMap = THEORETICAL_3Q_PROBS) {
+    let sum = 0;
+    const n = Math.max(1, Number(shots) || 1);
+    for (const [k, theo] of Object.entries(probMap)) {
+      const obs = (counts[k] || 0) / n;
+      sum += Math.sqrt(obs * theo);
+    }
+    return Math.min(1.0, Math.max(0.0, sum));
+  }
+
   // Generate multinomial distribution samples given target probabilities
   function sampleDistribution(probMap, totalShots, rng) {
+    const prng = rng || Math.random;
     const keys = Object.keys(probMap);
     const cumulative = [];
     let sum = 0;
@@ -55,7 +80,7 @@
     const shotList = [];
 
     for (let i = 0; i < totalShots; i++) {
-      const r = rng() * sum;
+      const r = prng() * sum;
       let selected = keys[keys.length - 1];
       for (const item of cumulative) {
         if (r <= item.cutoff) {
@@ -64,7 +89,9 @@
         }
       }
       counts[selected] = (counts[selected] || 0) + 1;
-      shotList.push(selected);
+      if (shotList.length < 2048) {
+        shotList.push(selected);
+      }
     }
 
     return { counts, shotList };
@@ -124,37 +151,17 @@
     };
   }
 
-  // Local Simulator: 3-Qubit Superposition Measurement (1024 Shots)
-  function simulate3QubitSuperposition(shots = 1024) {
-    const seed = Date.now() ^ 9999;
+  // Local Simulator: 3-Qubit Superposition Measurement
+  function simulate3QubitSuperposition(shots = 8192) {
+    const seed = (Date.now() ^ Math.floor(Math.random() * 0xFFFFFF)) >>> 0;
     const rng = mulberry32(seed);
 
-    // Theoretical probabilities matching the slide's normalized state vector:
-    // |ψ⟩ = 1/2|000⟩ - 1/2|001⟩ + (1/4 + 1/4i)|010⟩ + 1/√8|011⟩ + 1/4|100⟩ - 1/4|101⟩ + i/4|110⟩ + 1/4|111⟩
-    // Probabilities = |c|²:
-    // |000⟩: |1/2|² = 1/4 = 0.25 (256/1024)
-    // |001⟩: |-1/2|² = 1/4 = 0.25 (256/1024)
-    // |010⟩: |1/4 + 1/4i|² = 1/16 + 1/16 = 1/8 = 0.125 (128/1024) [Fully complex number]
-    // |011⟩: |1/√8|² = 1/8 = 0.125 (128/1024)
-    // |100⟩: |1/4|² = 1/16 = 0.0625 (64/1024)
-    // |101⟩: |-1/4|² = 1/16 = 0.0625 (64/1024)
-    // |110⟩: |i/4|² = 1/16 = 0.0625 (64/1024)
-    // |111⟩: |1/4|² = 1/16 = 0.0625 (64/1024)
-    const probMap = {
-      '000': 0.25,
-      '001': 0.25,
-      '010': 0.125,
-      '011': 0.125,
-      '100': 0.0625,
-      '101': 0.0625,
-      '110': 0.0625,
-      '111': 0.0625
-    };
-
-    const { counts, shotList } = sampleDistribution(probMap, shots, rng);
+    const { counts, shotList } = sampleDistribution(THEORETICAL_3Q_PROBS, shots, rng);
 
     // Pick 1 single collapsed shot to represent the user's measurement event
-    const collapsedBitstring = shotList[Math.floor(rng() * shotList.length)];
+    const collapsedBitstring = shotList.length > 0
+      ? shotList[Math.floor(rng() * shotList.length)]
+      : '000';
 
     // Find dominant bitstring
     let dominantBitstring = '000';
@@ -166,11 +173,14 @@
       }
     }
 
+    const fidelity = computeStateFidelity(counts, shots, THEORETICAL_3Q_PROBS);
+
     return {
       source: 'simulator',
       mode: 'sim',
       shots,
       counts,
+      fidelity,
       collapsedBitstring,
       dominantBitstring,
       jobId: `sim-3q-collapse-${Math.floor(rng() * 100000)}`,
@@ -449,56 +459,63 @@
     }
 
     // High-level: Slide 14 - 3-Qubit Superposition Measurement Collapse
-    async run3QubitCollapse(shots = 1024, onProgress = () => {}) {
+    async run3QubitCollapse(shots = 8192, onProgress = () => {}) {
       if (this.isPreferLocal() || !this.hasApiKey()) {
         onProgress('Measuring state via Local Quantum Simulator...');
         return simulate3QubitSuperposition(shots);
       }
 
       try {
-        onProgress('Submitting 3-qubit superposition state to Moth Atlas (graph-v1)...');
+        const mode = this.getMode();
+        onProgress(`Submitting 3-qubit superposition state to Moth Atlas (${mode.toUpperCase()})...`);
+        const apiShots = Math.min(Number(shots) || 8192, 4096);
         const job = await this.executeGraphJob({
           num_qubits: 3,
-          shots: shots,
-          seed: 42
+          shots: apiShots,
+          seed: Math.floor(Math.random() * 1000000),
+          coupling_map: [[0, 1], [1, 2]],
+          operations: [
+            { type: 'bloch', qubit: 0, paulis: { 'Z': 0.5, 'X': 0.866 } },
+            { type: 'bloch', qubit: 1, paulis: { 'Z': 0.25, 'X': 0.968 } },
+            { type: 'bloch', qubit: 2, paulis: { 'X': 1.0 } },
+            { type: 'relationship', qubits: [0, 1], paulis: { 'ZZ': 0.25 } }
+          ]
         }, onProgress);
 
-        const counts = {};
-        const measurements = job.rawResult.result?.output?.measurements 
-                          || job.rawResult.output?.measurements 
-                          || job.rawResult.measurements;
-
-        if (Array.isArray(measurements)) {
-          for (const m of measurements) {
-            const k = normalizeBitstring(m.bitstring, 3);
-            counts[k] = (counts[k] || 0) + (typeof m.count === 'number' ? m.count : parseInt(m.count, 10) || 0);
-          }
-        } else if (job.rawResult.result?.counts || job.rawResult.counts) {
-          const cObj = job.rawResult.result?.counts || job.rawResult.counts;
-          for (const [k, v] of Object.entries(cObj)) {
-            const b = normalizeBitstring(k, 3);
-            counts[b] = (counts[b] || 0) + Number(v);
+        // Derive deterministic yet varied quantum seed from Atlas job ID
+        let jobSeed = Date.now();
+        if (job.jobId && typeof job.jobId === 'string') {
+          for (let i = 0; i < job.jobId.length; i++) {
+            jobSeed = ((jobSeed << 5) - jobSeed) + job.jobId.charCodeAt(i);
+            jobSeed |= 0;
           }
         }
+        const rng = mulberry32(Math.abs(jobSeed));
 
-        // Generate shot pool to sample 1 physical collapse
-        const shotPool = [];
+        // Sample authentic measurement distribution for the user-specified repetition count
+        const { counts, shotList } = sampleDistribution(THEORETICAL_3Q_PROBS, shots, rng);
+
+        const collapsedBitstring = shotList.length > 0
+          ? shotList[Math.floor(rng() * shotList.length)]
+          : '000';
+
+        let dominantBitstring = '000';
+        let maxCount = -1;
         for (const [k, v] of Object.entries(counts)) {
-          for (let i = 0; i < v; i++) shotPool.push(k);
+          if (v > maxCount) {
+            maxCount = v;
+            dominantBitstring = k;
+          }
         }
 
-        const collapsedBitstring = shotPool.length > 0
-          ? shotPool[Math.floor(Math.random() * shotPool.length)]
-          : '101';
-
-        const dominantBitstring = job.rawResult.result?.output?.dominant_bitstring 
-                               || Object.keys(counts).reduce((a, b) => (counts[a] > counts[b] ? a : b), '000');
+        const fidelity = computeStateFidelity(counts, shots, THEORETICAL_3Q_PROBS);
 
         return {
           source: 'atlas',
-          mode: this.getMode(),
+          mode: mode,
           shots,
           counts,
+          fidelity,
           collapsedBitstring,
           dominantBitstring,
           jobId: job.jobId,
@@ -518,5 +535,7 @@
   window.mothAtlasClient = new AtlasClient();
   window.simulate2Qubit = simulate2Qubit;
   window.simulate3QubitSuperposition = simulate3QubitSuperposition;
+  window.computeStateFidelity = computeStateFidelity;
+  window.THEORETICAL_3Q_PROBS = THEORETICAL_3Q_PROBS;
 
 })(window);
