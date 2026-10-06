@@ -1,0 +1,3125 @@
+/* ExplainQuantum — Friendly, Cute Construction Paper Theme */
+
+:root {
+  --paper-bg: #fbf9f5;
+  --paper-grid: rgba(148, 163, 184, 0.15);
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --card-shadow: 0 10px 30px -5px rgba(51, 65, 85, 0.07), 0 0 0 1px rgba(226, 232, 240, 0.6);
+
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+
+  --accent-coral: #ef4444;
+  --accent-amber: #f59e0b;
+  --accent-green: #10b981;
+  --accent-blue: #3b82f6;
+  --accent-purple: #8b5cf6;
+
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-hand: 'Caveat', cursive, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body.paper-theme {
+  background-color: var(--paper-bg);
+  background-image: 
+    linear-gradient(var(--paper-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--paper-grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--text-main);
+  font-family: var(--font-main);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+/* Deck Container */
+.deck-wrapper {
+  width: 100%;
+  max-width: 900px;
+  min-height: 600px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Header */
+.deck-header {
+  padding: 16px 28px;
+  border-bottom: 2px dashed var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fafaf9;
+}
+
+.deck-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-main);
+}
+
+.doodle-star {
+  color: var(--accent-amber);
+  font-size: 1.2rem;
+}
+
+.slide-indicator {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #f1f5f9;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  color: var(--text-muted);
+}
+
+.slide-indicator-btn {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 600;
+  background: #f1f5f9;
+  border: 1.5px solid var(--card-border);
+  padding: 5px 13px;
+  border-radius: 9999px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.18s ease;
+}
+
+.slide-indicator-btn:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+  color: #1e293b;
+  transform: translateY(-1px);
+}
+
+.indicator-icon {
+  font-size: 0.95rem;
+}
+
+.nav-chevron {
+  font-size: 0.72rem;
+  opacity: 0.7;
+  transition: transform 0.2s ease;
+}
+
+.slide-indicator-btn:hover .nav-chevron {
+  opacity: 1;
+  transform: translateY(1px);
+}
+
+.current-slide {
+  color: var(--accent-blue);
+  font-weight: 700;
+}
+
+/* Main Viewport */
+.slide-card-container {
+  flex: 1;
+  position: relative;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Slide Cards */
+.slide-card {
+  display: none;
+  width: 100%;
+  max-width: 780px;
+  animation: fadeInSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.slide-card.active {
+  display: block;
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.center-layout {
+  text-align: center;
+  align-items: center;
+}
+
+/* Typography & Badges */
+.doodle-badge {
+  display: inline-block;
+  background: #fef3c7;
+  color: #b45309;
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 9999px;
+  border: 1.5px dashed #f59e0b;
+  transform: rotate(-2deg);
+}
+
+.hero-heading {
+  font-size: 2.7rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  max-width: 680px;
+}
+
+.slide-heading {
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.subtitle-text {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 580px;
+  line-height: 1.6;
+}
+
+.body-lead {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: #334155;
+}
+
+.slide-tag {
+  align-self: flex-start;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.red-tag { background: #fee2e2; color: #b91c1c; }
+.amber-tag { background: #fef3c7; color: #b45309; }
+.purple-tag { background: #f3e8ff; color: #7e22ce; }
+.blue-tag { background: #dbeafe; color: #1d4ed8; }
+.green-tag { background: #dcfce7; color: #15803d; }
+.orange-tag { background: #ffedd5; color: #c2410c; }
+
+/* Slide 2: Sticky Note */
+.sticky-note-card {
+  background: #fef08a;
+  border: 1px solid #fde047;
+  border-radius: var(--radius-sm);
+  padding: 28px 32px;
+  box-shadow: 2px 8px 20px rgba(234, 179, 8, 0.15);
+  position: relative;
+  transform: rotate(-1deg);
+  margin: 10px 0;
+}
+
+.pin-icon {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.3rem;
+}
+
+.misconception-quote {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #713f12;
+  font-style: normal;
+}
+
+.doodle-annotation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.handwritten-arrow {
+  font-family: var(--font-hand);
+  font-size: 2rem;
+  color: #94a3b8;
+  transform: rotate(20deg);
+}
+
+.handwritten-text {
+  font-family: var(--font-hand);
+  font-size: 1.45rem;
+  color: #64748b;
+}
+
+/* Slide 3: Not True Banner & Split Box */
+.not-true-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fee2e2;
+  border: 2px dashed #f87171;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  color: #991b1b;
+}
+
+.banner-icon { font-size: 1.4rem; }
+.banner-title { font-size: 1.25rem; font-weight: 800; }
+
+.split-doodle-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #f8fafc;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin: 8px 0;
+}
+
+.box-half {
+  flex: 1;
+}
+
+.box-half .mini-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.public-half .mini-label { color: #dc2626; }
+.reality-half .mini-label { color: #16a34a; }
+
+.box-half p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #334155;
+}
+
+.vs-circle {
+  font-size: 0.75rem;
+  font-weight: 800;
+  background: #e2e8f0;
+  color: #64748b;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.prompt-question-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  padding: 14px 20px;
+  border-radius: var(--radius-sm);
+  color: #166534;
+  font-size: 1.05rem;
+}
+
+.question-sparkle { font-size: 1.3rem; }
+
+/* Slide 4: Curiosity Grid */
+.curiosity-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.curiosity-card {
+  background: #fafaf9;
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.card-emoji {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.curiosity-card p {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: #334155;
+}
+
+.summary-pill {
+  align-self: center;
+  background: #f3e8ff;
+  color: #7e22ce;
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding: 6px 20px;
+  border-radius: 9999px;
+  border: 1.5px dashed #c084fc;
+  transform: rotate(1deg);
+}
+
+/* Slide 5: Puzzled Box */
+.conclusion-box {
+  background: #eff6ff;
+  border: 2px dashed #93c5fd;
+  border-radius: var(--radius-md);
+  padding: 16px 28px;
+  color: #1e40af;
+  font-size: 1.25rem;
+}
+
+/* Slide 6: Wheel Board */
+.wheel-interactive-board {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: #f8fafc;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.wheel-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.blueprint-canvas-wrap {
+  background: #eff6ff;
+  border: 2px solid #bfdbfe;
+  border-radius: var(--radius-sm);
+  padding: 10px;
+}
+
+.col-caption {
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  color: #2563eb;
+}
+
+.blueprint-arrow {
+  font-size: 1.8rem;
+  color: var(--text-dim);
+}
+
+/* Rotatable Wheel Element */
+.wheel-interaction-wrap {
+  padding: 10px;
+}
+
+.rotatable-wheel {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: #fef3c7;
+  border: 8px solid #d97706;
+  position: relative;
+  cursor: grab;
+  box-shadow: 0 10px 20px rgba(217, 119, 6, 0.2);
+  transition: transform 0.05s linear;
+}
+
+.rotatable-wheel:active {
+  cursor: grabbing;
+}
+
+.wheel-hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  background: #78350f;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  z-index: 5;
+}
+
+.wheel-spoke {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #d97706;
+  transform-origin: center;
+}
+
+.wheel-spoke.s1 { transform: translateY(-50%) rotate(0deg); }
+.wheel-spoke.s2 { transform: translateY(-50%) rotate(60deg); }
+.wheel-spoke.s3 { transform: translateY(-50%) rotate(120deg); }
+
+.wheel-marker {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ef4444;
+  font-size: 1.3rem;
+  z-index: 6;
+}
+
+.spin-instruction {
+  font-size: 0.88rem;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  border: 1px dashed #f59e0b;
+}
+
+/* Slide 7: Turing Machine */
+.hero-callout {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ea580c;
+  background: #ffedd5;
+  padding: 6px 18px;
+  border-radius: 9999px;
+  border: 2px dashed #f97316;
+  margin-bottom: 6px;
+}
+
+.turing-card-box {
+  background: #f8fafc;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.tm-head-wrapper {
+  height: 50px;
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+}
+
+.tm-robot-head {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.robot-face {
+  background: #3b82f6;
+  color: #fff;
+  border-radius: 8px;
+  padding: 4px 12px;
+  display: flex;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+.robot-pointer {
+  color: #3b82f6;
+  font-size: 0.9rem;
+  line-height: 0.7;
+}
+
+.tm-tape-viewport {
+  overflow-x: auto;
+  padding: 8px 0;
+  width: 100%;
+  max-width: 480px;
+}
+
+.tm-tape-track {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.tape-block {
+  width: 52px;
+  height: 60px;
+  background: #fff;
+  border: 2px solid var(--card-border);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1e293b;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.tape-block.active-head {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.2);
+}
+
+.tape-block-idx {
+  position: absolute;
+  bottom: 2px;
+  font-size: 0.65rem;
+  color: var(--text-dim);
+}
+
+.tm-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cute-btn {
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cute-btn.primary {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+.cute-btn.primary:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.cute-btn.secondary {
+  background: #f1f5f9;
+  color: #334155;
+  border-color: var(--card-border);
+}
+
+.cute-btn.secondary:hover {
+  background: #e2e8f0;
+}
+
+.cute-btn.neutral {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.tm-hint-note {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.footnote-text {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Slide 8: Universal Truth */
+.quote-paper-card {
+  background: #f0fdf4;
+  border-left: 5px solid #22c55e;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 18px 24px;
+}
+
+.main-body-text {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #14532d;
+}
+
+.evolution-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.evo-item {
+  flex: 1;
+  background: #f8fafc;
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.evo-icon { font-size: 1.8rem; margin-bottom: 6px; }
+.evo-name { font-weight: 700; font-size: 0.95rem; color: #1e293b; }
+.evo-sub { font-size: 0.75rem; color: var(--text-dim); }
+
+.evo-arrow {
+  color: var(--text-dim);
+  font-size: 1.2rem;
+}
+
+.takeaway-badge-box {
+  background: #fafaf9;
+  border: 1.5px dashed #cbd5e1;
+  border-radius: var(--radius-sm);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.05rem;
+  color: #334155;
+}
+
+.badge-icon { font-size: 1.4rem; }
+
+/* Slide 9: Spotlight Question */
+.spotlight-card {
+  background: #faf5ff;
+  border: 2px solid #e9d5ff;
+  border-radius: var(--radius-md);
+  padding: 32px 36px;
+  max-width: 650px;
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.08);
+}
+
+.sparkle-row {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+
+.spotlight-question {
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.35;
+  color: #581c87;
+  margin-bottom: 12px;
+}
+
+.spotlight-sub {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #7e22ce;
+}
+
+.doodle-teaser {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.handwritten-arrow-curved {
+  font-family: var(--font-hand);
+  font-size: 2.2rem;
+  color: #a855f7;
+  transform: rotate(15deg);
+}
+
+/* Footer Navigation */
+.deck-footer {
+  padding: 16px 28px;
+  border-top: 2px dashed var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fafaf9;
+}
+
+.nav-btn {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 10px 22px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.prev-btn {
+  background: #f1f5f9;
+  color: #475569;
+  border-color: var(--card-border);
+}
+
+.prev-btn:hover:not(:disabled) {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.next-btn {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #2563eb;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+.next-btn:hover:not(:disabled) {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.nav-jump-btn {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: #f1f5f9;
+  border: 1.5px solid var(--card-border);
+  color: #475569;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.nav-jump-btn:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+}
+
+.dots-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dot-pill {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dot-pill:hover {
+  background: #94a3b8;
+}
+
+.dot-pill.active {
+  width: 24px;
+  border-radius: 9999px;
+  background: #3b82f6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-heading { font-size: 2rem; }
+  .slide-heading { font-size: 1.45rem; }
+  .curiosity-grid { grid-template-columns: 1fr; }
+  .wheel-interactive-board { flex-direction: column; }
+  .evolution-row { flex-direction: column; }
+  .evo-arrow { transform: rotate(90deg); }
+  .slide-card-container { padding: 24px 16px; }
+}
+
+/* ========================================================
+   Styles for Slides 7 through 19 (Light Paper Theme)
+   ======================================================== */
+
+/* Slide 7: Transition Question Pill */
+.transition-question-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #faf5ff;
+  border: 1.5px dashed #c084fc;
+  padding: 14px 20px;
+  border-radius: var(--radius-sm);
+  color: #6b21a8;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+.star-sparkle { font-size: 1.3rem; }
+
+/* Slide 8: #SAT Logic Circuit Simulation */
+.circuit-sim-box {
+  background: #f8fafc;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 10px 0;
+}
+
+.circuit-sim-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.circuit-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.switches-row {
+  display: flex;
+  gap: 8px;
+}
+
+.sat-switch-btn {
+  width: 44px;
+  height: 48px;
+  background: #ffffff;
+  border: 2px solid var(--card-border);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sat-switch-btn.active {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.25);
+}
+
+.circuit-diagram-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 0;
+  background: #ffffff;
+  border: 1.5px dashed var(--card-border);
+  border-radius: var(--radius-sm);
+}
+
+.gate-chip {
+  background: #e0f2fe;
+  border: 2px solid #38bdf8;
+  color: #0369a1;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+.wire-arrow {
+  color: #94a3b8;
+  font-size: 1.1rem;
+}
+
+.output-bulb {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 1.15rem;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 2px solid var(--card-border);
+  background: #f1f5f9;
+  color: #64748b;
+  transition: all 0.2s;
+}
+
+.output-bulb.lit {
+  background: #fef08a;
+  border-color: #eab308;
+  color: #854d0e;
+  box-shadow: 0 0 16px rgba(250, 204, 21, 0.5);
+}
+
+.circuit-controls-and-tally {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.odometer-badge {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  background: #f1f5f9;
+  padding: 6px 14px;
+  border-radius: 8px;
+  color: #334155;
+}
+
+.num-highlight {
+  font-weight: 800;
+  color: #2563eb;
+}
+
+.num-highlight.green {
+  color: #16a34a;
+}
+
+/* Slide 9: Giant Scroll Unrolling */
+.amber-callout {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  color: #b45309;
+}
+
+.scroll-art-container {
+  background: #f8fafc;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Slide 10: 300 Switches & Generic Ghost */
+.ghost-card-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  background: #f8fafc;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
+  margin: 10px 0;
+}
+
+.ghost-visual-left {
+  flex-shrink: 0;
+}
+
+.generic-ghost-svg {
+  display: block;
+}
+
+@keyframes ghostFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.floating-ghost-actor {
+  animation: ghostFloat 3.2s ease-in-out infinite;
+}
+
+.ghost-text-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #334155;
+}
+
+.callout-pill {
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.red-pill {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #f87171;
+}
+
+/* Slide 11: 5-Qubit Circuit & Gray Code Snake Grid */
+.quantum-circuit-snake-box {
+  background: #f8fafc;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.circuit-schematic-mini {
+  background: #ffffff;
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+}
+
+.schematic-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.snake-board-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.snake-legend {
+  font-size: 0.8rem;
+  color: #64748b;
+  display: flex;
+  justify-content: space-between;
+}
+
+.snake-grid-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #ffffff;
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+}
+
+.snake-row {
+  display: flex;
+  gap: 6px;
+  justify-content: space-between;
+}
+
+.snake-row.reverse-row {
+  flex-direction: row-reverse;
+}
+
+.snake-cell {
+  flex: 1;
+  height: 40px;
+  border-radius: 6px;
+  border: 1.5px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.snake-cell:hover {
+  transform: scale(1.08);
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cell-bits {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.cell-idx {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: #475569;
+}
+
+.snake-tooltip {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: #334155;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* Slide 13: Archimedes Lever */
+.archimedes-lever-box {
+  background: #f8fafc;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+}
+
+/* Slide 12: Two Full-Width Rows Separated by VS */
+.entangle-rows-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.entangle-row {
+  background: #ffffff;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 16px 22px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.entangle-row.separable-row {
+  border-left: 5px solid #3b82f6;
+  background: #f8fafc;
+}
+
+.entangle-row.entangled-row {
+  border-left: 5px solid #8b5cf6;
+  background: #faf5ff;
+}
+
+.entangle-row-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.row-tag {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+.row-tag.blue-tag {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.row-tag.purple-tag {
+  background: #ede9fe;
+  color: #6b21a8;
+}
+
+.row-badge-note {
+  font-family: var(--font-handwriting);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.entangle-eq-box {
+  background: #ffffff;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  overflow-x: auto;
+  text-align: center;
+}
+
+.math-eq-display {
+  font-size: 1.25rem;
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+.entangle-row-desc {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #334155;
+  margin: 0;
+}
+
+.entangle-vs-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 2px 0;
+}
+
+.vs-divider-line {
+  flex: 1;
+  height: 2px;
+  background: #e2e8f0;
+}
+
+.vs-divider-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #1e293b;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.05em;
+}
+
+/* Slide 14: Ket Notation Collapse */
+.ket-collapse-box {
+  background: #f8fafc;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 12px 0;
+}
+
+.ket-state-display {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #1e40af;
+  background: #eff6ff;
+  border: 2px dashed #93c5fd;
+  padding: 14px 20px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  max-width: 100%;
+  overflow-x: auto;
+  transition: all 0.3s ease;
+}
+
+.ket-state-display .katex-display {
+  margin: 0;
+  font-size: 1.12rem;
+}
+
+.ket-state-display.collapsed-faded {
+  opacity: 0.3;
+  filter: blur(1px);
+}
+
+/* Slide 14: Normalized Amplitudes Reference Guide */
+.ket-guide-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ket-guide-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #334155;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.guide-sum-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #15803d;
+  background: #dcfce7;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid #86efac;
+}
+
+.ket-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .ket-guide-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.guide-cell {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.guide-cell.highlight {
+  background: #fdf4ff;
+  border-color: #d8b4fe;
+}
+
+.guide-state {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.complex-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: #a855f7;
+  color: #ffffff;
+  padding: 1px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+.guide-calc {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-family: var(--font-mono);
+}
+
+.guide-pct {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #2563eb;
+}
+
+.guide-cell.highlight .guide-pct {
+  color: #9333ea;
+}
+
+.guide-pct small {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.collapse-action-row {
+  display: flex;
+  gap: 12px;
+}
+
+.collapse-receipt-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f0fdf4;
+  border: 2px solid #86efac;
+  padding: 14px 22px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: #166534;
+  animation: popIn 0.25s ease-out;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.receipt-icon { font-size: 1.5rem; }
+.receipt-note { font-size: 0.8rem; color: #64748b; margin-left: 8px; }
+
+/* Slide 15: Grover Amplification & 3Blue1Brown Card */
+.grover-demo-box {
+  background: #f8fafc;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.grover-bars-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 14px;
+  height: 140px;
+  border-bottom: 2px solid var(--card-border);
+  padding-bottom: 8px;
+}
+
+.grover-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 44px;
+}
+
+.grover-bar-fill {
+  width: 32px;
+  background: #94a3b8;
+  border-radius: 4px 4px 0 0;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.grover-bar-fill.target-fill {
+  background: #22c55e;
+  box-shadow: 0 0 14px rgba(34, 197, 94, 0.4);
+}
+
+.grover-bar-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.grover-bar-pct {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.target-wrap .grover-bar-label,
+.target-wrap .grover-bar-pct {
+  color: #15803d;
+  font-weight: 800;
+}
+
+.grover-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.grover-step-note {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.b3b-link-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #fdf2f8;
+  border: 2px solid #fbcfe8;
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.b3b-link-card:hover {
+  background: #fce7f3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(236, 72, 153, 0.15);
+}
+
+.b3b-icon { font-size: 2rem; }
+
+.b3b-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.b3b-title {
+  font-weight: 800;
+  font-size: 0.98rem;
+  color: #9d174d;
+}
+
+.b3b-sub {
+  font-size: 0.82rem;
+  color: #831843;
+}
+
+.b3b-arrow {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #db2777;
+}
+
+/* Slide 16: Two Cat Illustration Panels & Only Replay Button */
+.cat-duo-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .cat-duo-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cat-panel {
+  background: #ffffff;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.cat-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.panel-step-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+.panel-step-badge.red-badge {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.panel-step-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+.cat-svg-canvas {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cat-panel-caption {
+  font-family: var(--font-handwriting);
+  font-size: 1.1rem;
+  color: #64748b;
+  text-align: center;
+  margin-top: 6px;
+}
+
+.cat-controls-single-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+@keyframes highDimPulse {
+  0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+  50% { transform: translateY(-5px) scale(1.02) rotate(1deg); }
+}
+
+.floating-highdim-group {
+  animation: highDimPulse 3.5s ease-in-out infinite;
+  transform-origin: 160px 72px;
+}
+
+.stick-badge {
+  background: #f3e8ff;
+  color: #7e22ce;
+  border: 1px solid #d8b4fe;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  font-family: var(--font-mono);
+}
+
+/* KaTeX and Mathematical Typography */
+.katex {
+  font-size: 1.08em;
+  color: #1e293b;
+}
+
+.katex-display {
+  margin: 8px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.math-inline {
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: 0.95em;
+  color: #1e293b;
+  padding: 0 2px;
+}
+
+.math-display {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.1em;
+  text-align: center;
+  margin: 8px 0;
+}
+
+/* Turing Machine Tape in-word highlight */
+.tape-block.in-word {
+  border-color: #93c5fd;
+  background: #f0fdf4;
+}
+
+.tape-block.in-word.active-head {
+  border-color: #2563eb;
+  background: #dbeafe;
+}
+
+.tm-status-pill {
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+/* Slide 18: Grand Manifesto Card */
+.grand-manifesto-card {
+  background: #fffbeb;
+  border: 2px solid #fde68a;
+  border-radius: var(--radius-md);
+  padding: 32px 36px;
+  box-shadow: 0 10px 25px rgba(245, 158, 11, 0.1);
+  position: relative;
+  margin: 12px 0;
+}
+
+.ribbon-sparkle {
+  font-size: 1.4rem;
+  color: #d97706;
+  margin-bottom: 12px;
+}
+
+.manifesto-text {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  font-weight: 600;
+  color: #78350f;
+  font-style: normal;
+}
+
+/* Slide 19: Thank You */
+.thank-you-text {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #15803d;
+  letter-spacing: -0.02em;
+  margin: 10px 0;
+}
+
+.restart-btn {
+  margin-top: 10px;
+  font-size: 1.05rem;
+  padding: 12px 28px;
+}
+
+/* ========================================================
+   Refined Styles for Turing Tape, Circuit Schematic, and Full Truth Table
+   ======================================================== */
+
+/* Infinite Centered Turing Stage (Slide 7) */
+.tm-infinite-stage {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tm-robot-head-fixed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  margin-bottom: 2px;
+}
+
+.tm-tape-viewport {
+  width: 100%;
+  overflow: hidden;
+  padding: 8px 0;
+  mask-image: linear-gradient(90deg, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+.tm-tape-track {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.tape-infinity-edge {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  padding: 0 10px;
+  user-select: none;
+}
+
+/* Slide 8: Real Logic Circuit Schematic */
+.circuit-sim-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.circuit-schematic-canvas {
+  background: #ffffff;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logic-circuit-svg {
+  display: block;
+}
+
+.circuit-wire {
+  fill: none;
+  stroke: #cbd5e1;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.15s ease, stroke-width 0.15s ease;
+}
+
+.circuit-wire.wire-on {
+  stroke: #22c55e;
+  stroke-width: 3.5;
+  filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.4));
+}
+
+.gate-symbol-group .gate-body {
+  fill: #f8fafc;
+  stroke: #64748b;
+  stroke-width: 2;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+.gate-symbol-group .gate-accent-line {
+  fill: none;
+  stroke: #64748b;
+  stroke-width: 2;
+}
+
+.gate-symbol-group .gate-bubble {
+  fill: #ffffff;
+  stroke: #64748b;
+  stroke-width: 2;
+}
+
+.gate-symbol-group .gate-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  fill: #475569;
+}
+
+.gate-symbol-group.gate-on .gate-body {
+  fill: #dcfce7;
+  stroke: #16a34a;
+}
+
+.gate-symbol-group.gate-on .gate-accent-line,
+.gate-symbol-group.gate-on .gate-bubble {
+  stroke: #16a34a;
+}
+
+.gate-symbol-group.gate-on .gate-text {
+  fill: #15803d;
+}
+
+.circuit-bulb-badge {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 2px solid var(--card-border);
+  background: #f1f5f9;
+  color: #64748b;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.circuit-bulb-badge.lit {
+  background: #fef08a;
+  border-color: #eab308;
+  color: #854d0e;
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.6);
+  transform: translateY(-50%) scale(1.04);
+}
+
+.circuit-btns-left {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Slide 9: Full 32-Row Truth Table Card */
+.truth-table-full-card {
+  background: #ffffff;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tt-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1.5px solid var(--card-border);
+  padding-bottom: 10px;
+}
+
+.tt-title {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #0f172a;
+}
+
+.tt-sub {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.tt-columns-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.tt-column {
+  background: #f8fafc;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.tt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.tt-table thead {
+  background: #e2e8f0;
+  color: #334155;
+  font-weight: 700;
+}
+
+.tt-table th, .tt-table td {
+  padding: 4px 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tt-table tbody tr:hover {
+  background: #f1f5f9;
+}
+
+.tt-table .col-idx {
+  color: #94a3b8;
+  font-size: 0.72rem;
+  width: 28px;
+}
+
+.tt-table .col-bits {
+  font-weight: 600;
+  color: #1e293b;
+  letter-spacing: 0.08em;
+}
+
+.out-badge {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 0.75rem;
+}
+
+.badge-one {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.badge-zero {
+  background: #f1f5f9;
+  color: #94a3b8;
+}
+
+.tt-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  border: 1px dashed var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 10px 18px;
+  font-size: 0.9rem;
+}
+
+.green-stat {
+  color: #16a34a;
+  font-weight: 800;
+}
+
+.blue-stat {
+  color: #2563eb;
+  font-weight: 800;
+}
+
+/* ========================================================
+   Physical Input Knife Switches in Circuit & Square Tape Blocks
+   ======================================================== */
+
+/* Force Turing Tape Blocks to be strictly square */
+.tape-block {
+  width: 52px !important;
+  height: 52px !important;
+  min-width: 52px !important;
+  min-height: 52px !important;
+  aspect-ratio: 1 !important;
+  box-sizing: border-box !important;
+  border-radius: 8px !important;
+}
+
+/* SVG Knife Switches in Circuit (Slide 8) */
+.svg-switch-unit {
+  transition: opacity 0.2s;
+}
+
+.svg-switch-unit:hover .sw-terminal-dot {
+  fill: #3b82f6;
+}
+
+.sw-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 800;
+  fill: #1e293b;
+  user-select: none;
+}
+
+.sw-lead-wire {
+  stroke: #94a3b8;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.sw-terminal-dot {
+  fill: #64748b;
+  stroke: #334155;
+  stroke-width: 1.5;
+  transition: fill 0.2s;
+}
+
+.sw-blade {
+  fill: none;
+  stroke: #94a3b8;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  transition: d 0.15s ease-out, stroke 0.15s ease-out;
+}
+
+.sw-blade.blade-closed {
+  stroke: #16a34a;
+  stroke-width: 4;
+  filter: drop-shadow(0 0 3px rgba(22, 163, 74, 0.5));
+}
+
+.sw-blade.blade-open {
+  stroke: #94a3b8;
+  stroke-dasharray: none;
+}
+
+.sw-knob {
+  fill: #e2e8f0;
+  stroke: #475569;
+  stroke-width: 1.5;
+  transition: cx 0.15s ease-out, cy 0.15s ease-out, fill 0.15s ease-out;
+}
+
+.sw-knob.knob-on {
+  fill: #22c55e;
+  stroke: #15803d;
+}
+
+.sw-badge-text {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+  fill: #94a3b8;
+  user-select: none;
+  transition: fill 0.15s;
+}
+
+.sw-badge-text.badge-on {
+  fill: #16a34a;
+}
+
+/* ========================================================
+   Moth Quantum Atlas Header Badge & Settings Modal
+   ======================================================== */
+.moth-header-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  padding: 5px 13px;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.moth-header-pill:hover {
+  border-color: #8b5cf6;
+  background: #faf5ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(139, 92, 246, 0.15);
+}
+
+.moth-logo-icon {
+  font-size: 1rem;
+}
+
+.moth-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #eab308;
+  display: inline-block;
+  box-shadow: 0 0 6px #eab308;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.moth-status-dot.dot-local {
+  background: #eab308;
+  box-shadow: 0 0 6px #eab308;
+}
+
+.moth-status-dot.dot-emu {
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+}
+
+.moth-status-dot.dot-qpu {
+  background: #a855f7;
+  box-shadow: 0 0 8px #a855f7;
+}
+
+/* Moth Modal Backdrop & Card */
+.moth-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.moth-modal-card {
+  background: #ffffff;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.moth-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 1.5px solid #f1f5f9;
+}
+
+.moth-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.moth-modal-title h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.moth-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 2px 6px;
+  line-height: 1;
+}
+
+.moth-modal-close:hover {
+  color: #1e293b;
+}
+
+.moth-modal-body {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.moth-modal-desc {
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.moth-mode-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.moth-mode-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.moth-mode-card:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.moth-mode-card input[type="radio"] {
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.mode-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mode-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.mode-sub {
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.35;
+}
+
+.moth-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.moth-input-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.moth-input-field {
+  padding: 9px 12px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: #1e293b;
+  background: #ffffff;
+  transition: border-color 0.15s;
+}
+
+.moth-input-field:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.moth-input-tip {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.moth-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 22px;
+  border-top: 1.5px solid #f1f5f9;
+  background: #fafafa;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+/* ========================================================
+   Slide 12: Interactive 2-Qubit Entanglement Lab Box
+   ======================================================== */
+.entanglement-lab-box {
+  background: #f8fafc;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.entangle-lab-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lab-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.lab-badge {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+}
+
+.lab-subtitle {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.lab-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lab-status-banner {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #475569;
+}
+
+.status-dot-mini {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #eab308;
+  display: inline-block;
+}
+
+/* State Explainer Row (Separable vs Bell State) */
+.entangle-state-explainer-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 720px) {
+  .entangle-state-explainer-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.state-explainer-card {
+  background: #ffffff;
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.state-explainer-card.blue-border {
+  border-left: 4px solid #3b82f6;
+  background: #f8fafc;
+}
+
+.state-explainer-card.purple-border {
+  border-left: 4px solid #8b5cf6;
+  background: #faf5ff;
+}
+
+.explainer-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: #1e293b;
+}
+
+.explainer-bullet {
+  background: #e2e8f0;
+  color: #334155;
+  font-weight: 800;
+  font-size: 0.72rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blue-border .explainer-bullet {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.purple-border .explainer-bullet {
+  background: #ede9fe;
+  color: #6b21a8;
+}
+
+.explainer-desc {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #475569;
+  margin: 0;
+}
+
+.state-math-pill {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: #ffffff;
+  border: 1px dashed #cbd5e1;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-align: center;
+  color: #1e293b;
+}
+
+.lab-instruction-note {
+  font-size: 0.84rem;
+  color: #334155;
+  background: #f1f5f9;
+  border-left: 3px solid #64748b;
+  padding: 8px 12px;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+
+.entangle-compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 720px) {
+  .entangle-compare-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.compare-card {
+  background: #ffffff;
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.compare-card.product-card {
+  border-top: 4px solid #3b82f6;
+}
+
+.compare-card.entangled-card {
+  border-top: 4px solid #8b5cf6;
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.compare-tag {
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.compare-tag.blue {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.compare-tag.purple {
+  background: #ede9fe;
+  color: #6b21a8;
+}
+
+.card-metric {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+.histogram-bars-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 120px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 6px;
+  gap: 8px;
+}
+
+.hist-bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.hist-bar-fill {
+  width: 100%;
+  max-width: 38px;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  min-height: 4px;
+}
+
+.product-card .hist-bar-fill {
+  background: #60a5fa;
+}
+
+.entangled-card .hist-bar-fill {
+  background: #a855f7;
+}
+
+.hist-bar-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.hist-bar-count {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.card-footer-takeaway {
+  font-size: 0.82rem;
+  line-height: 1.4;
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+.card-footer-takeaway.blue {
+  background: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+}
+
+.card-footer-takeaway.purple {
+  background: #faf5ff;
+  color: #6b21a8;
+  border: 1px solid #e9d5ff;
+}
+
+/* ========================================================
+   Slide 14: Ket Superposition Collapse & 1024-Shot Histogram
+   ======================================================== */
+.ket-collapse-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: -6px;
+}
+
+.ket-box-badge {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #6b21a8;
+  background: #ede9fe;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ket-box-note {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-family: var(--font-sans);
+}
+
+.collapse-status-banner {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #475569;
+  width: 100%;
+  max-width: 580px;
+  justify-content: center;
+}
+
+.cute-btn.ghost-btn {
+  background: #ffffff;
+  color: #475569;
+  border: 1.5px solid #cbd5e1;
+}
+
+.cute-btn.ghost-btn:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.ket-histogram-wrap {
+  width: 100%;
+  background: #ffffff;
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: popIn 0.3s ease-out;
+}
+
+.histogram-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hist-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.hist-sub {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.ket-bars-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 140px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 6px;
+  gap: 6px;
+}
+
+.ket-bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ket-bar-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+  font-family: var(--font-mono);
+}
+
+.bar-obs-pct {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.bar-obs-runs {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.ket-bar-item.collapsed-target .bar-obs-pct {
+  color: #15803d;
+}
+
+.ket-bar-item.collapsed-target .bar-obs-runs {
+  color: #166534;
+}
+
+.ket-bar-fill {
+  width: 100%;
+  max-width: 32px;
+  background: #94a3b8;
+  border-radius: 4px 4px 0 0;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  min-height: 4px;
+}
+
+.ket-bar-item.collapsed-target .ket-bar-fill {
+  background: #22c55e;
+  box-shadow: 0 0 14px rgba(34, 197, 94, 0.5);
+  border: 2px solid #16a34a;
+}
+
+.ket-bar-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-mono);
+  line-height: 1.15;
+}
+
+.bar-ket-name {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+.bar-theo-pct {
+  font-size: 0.64rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.ket-bar-item.collapsed-target .bar-ket-name {
+  font-weight: 800;
+  color: #15803d;
+}
+
+.hist-receipt-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: #64748b;
+  background: #f8fafc;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px dashed #cbd5e1;
+}
+
+/* ========================================================
+   Slide Navigator Modal (Jump to Any Slide)
+   ======================================================== */
+.slide-nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+.slide-nav-modal {
+  background: #ffffff;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 880px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.slide-nav-header {
+  padding: 16px 22px;
+  border-bottom: 2px dashed var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #fafaf9;
+}
+
+.slide-nav-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-modal-icon {
+  font-size: 1.6rem;
+}
+
+.slide-nav-title h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0;
+}
+
+.nav-modal-sub {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.nav-modal-sub kbd {
+  background: #e2e8f0;
+  border: 1px solid #cbd5e1;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.slide-nav-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  max-width: 360px;
+  justify-content: flex-end;
+}
+
+.slide-filter-input {
+  width: 100%;
+  max-width: 260px;
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.slide-filter-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #64748b;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 6px;
+  line-height: 1;
+  transition: all 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.slide-nav-grid {
+  padding: 18px 20px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+  background: #f8fafc;
+}
+
+.slide-nav-card {
+  background: #ffffff;
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  position: relative;
+}
+
+.slide-nav-card:hover {
+  transform: translateY(-2px);
+  border-color: #3b82f6;
+  box-shadow: 0 6px 14px rgba(59, 130, 246, 0.1);
+  background: #f0f7ff;
+}
+
+.slide-nav-card.active {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.slide-nav-card.active .nav-card-num {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.slide-nav-card.active::after {
+  content: "Current";
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: #3b82f6;
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+.nav-card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-card-num {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #1d4ed8;
+  background: #dbeafe;
+  padding: 2px 7px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.nav-card-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.04em;
+}
+
+.nav-card-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.35;
+}
+
+.nav-card-desc {
+  font-size: 0.74rem;
+  color: #64748b;
+  line-height: 1.35;
+  margin: 0;
+}
+

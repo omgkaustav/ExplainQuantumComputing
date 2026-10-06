@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExplainQuantumComputing — A Better Way to Think About Quantum Computers</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- KaTeX for crisp LaTeX Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body class="paper-theme">
+
+  <!-- Ambient Construction Paper Grid Container -->
+  <div class="deck-wrapper">
+
+    <!-- Top Paper Header -->
+    <header class="deck-header">
+      <div class="deck-brand">
+        <span class="doodle-star">✦</span>
+        <span class="brand-name">ExplainQuantumComputing</span>
+      </div>
+
+      <!-- Moth Quantum Engine Status & Settings Button -->
+      <button class="moth-header-pill" id="btnMothSettings" title="Configure Moth Quantum Engine & API Key">
+        <span class="moth-logo-icon">🦋</span>
+        <span class="moth-status-txt" id="mothHeaderLabel">Moth: Local Sim</span>
+        <span class="moth-status-dot" id="mothHeaderDot"></span>
+      </button>
+
+      <!-- Jump to Any Slide Navigation Button -->
+      <button class="slide-indicator-btn" id="btnSlideNavigator" title="Jump to any slide (Press 'S' or click)">
+        <span class="indicator-icon">📑</span>
+        <span class="current-slide" id="slideNum">1</span>
+        <span class="slash">/</span>
+        <span class="total-slides" id="totalSlides">19</span>
+        <span class="nav-chevron">▾</span>
+      </button>
+    </header>
+
+    <!-- Main Slide Card Viewport -->
+    <main class="slide-card-container">
+      
+      <!-- Slide 1 -->
+      <section class="slide-card active" data-slide="1">
+        <div class="slide-content center-layout">
+          <div class="doodle-badge">✨ A Friendly Explainer</div>
+          <h1 class="hero-heading">A Better way to think about Quantum Computers</h1>
+          <div class="hero-illustration">
+            <svg class="friendly-mascot" viewBox="0 0 200 200" width="160" height="160">
+              <ellipse cx="100" cy="100" rx="80" ry="32" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="6 6" transform="rotate(-25 100 100)"/>
+              <ellipse cx="100" cy="100" rx="80" ry="32" fill="none" stroke="#f472b6" stroke-width="3" stroke-dasharray="6 6" transform="rotate(25 100 100)"/>
+              <circle cx="100" cy="100" r="48" fill="#fef3c7" stroke="#f59e0b" stroke-width="3.5"/>
+              <circle cx="86" cy="94" r="5" fill="#1e293b"/>
+              <circle cx="114" cy="94" r="5" fill="#1e293b"/>
+              <path d="M 88 110 Q 100 124 112 110" fill="none" stroke="#1e293b" stroke-width="3.5" stroke-linecap="round"/>
+              <circle cx="78" cy="104" r="6" fill="#fecdd3"/>
+              <circle cx="122" cy="104" r="6" fill="#fecdd3"/>
+              <text x="145" y="65" font-size="20" fill="#f59e0b">✦</text>
+              <text x="35" y="145" font-size="16" fill="#3b82f6">✦</text>
+            </svg>
+          </div>
+          <p class="subtitle-text">Let's look past the pop-science buzzwords and build a clear, honest mental model together.</p>
+        </div>
+      </section>
+
+      <!-- Slide 2 -->
+      <section class="slide-card" data-slide="2">
+        <div class="slide-content">
+          <span class="slide-tag red-tag">The Myth</span>
+          <h2 class="slide-heading">There’s this common misconception about Quantum Computers:</h2>
+          
+          <div class="sticky-note-card">
+            <div class="pin-icon">📌</div>
+            <blockquote class="misconception-quote">
+              “Because qubits, unlike bits, can be both 0 and 1 at once, qubits can go through a quantum circuit and get the result of all combination of bits at once — thus quantum computers are exponentially faster than classical bits.”
+            </blockquote>
+          </div>
+
+          <div class="doodle-annotation">
+            <span class="handwritten-arrow">⤷</span>
+            <span class="handwritten-text">You've probably heard this in tech news or pop-science articles!</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3 -->
+      <section class="slide-card" data-slide="3">
+        <div class="slide-content">
+          <span class="slide-tag amber-tag">The Reality Check</span>
+          <div class="callout-banner not-true-banner">
+            <span class="banner-icon">⚠️</span>
+            <span class="banner-title">This is NOT true.</span>
+          </div>
+
+          <p class="body-lead">
+            And it leads to a misalignment between expectations between the public and <strong>“quantum people”</strong> (i.e. engineers, researchers and quantum developers).
+          </p>
+
+          <div class="split-doodle-box">
+            <div class="box-half public-half">
+              <span class="mini-label">Public Expectation:</span>
+              <p>“A magic super-processor that checks every password and searches all possibilities in parallel!”</p>
+            </div>
+            <div class="vs-circle">VS</div>
+            <div class="box-half reality-half">
+              <span class="mini-label">Quantum Reality:</span>
+              <p>“A delicate, precise linear algebra machine where you can only measure ONE classical answer.”</p>
+            </div>
+          </div>
+
+          <div class="prompt-question-box">
+            <span class="question-sparkle">💡</span>
+            <p><strong>But is there a better, more accurate mental model of quantum computing?</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4 -->
+      <section class="slide-card" data-slide="4">
+        <div class="slide-content">
+          <span class="slide-tag purple-tag">Wild Physics</span>
+          <h2 class="slide-heading">Quantum Mechanics is super mysterious and interesting.</h2>
+
+          <div class="curiosity-grid">
+            <div class="curiosity-card">
+              <div class="card-emoji">🌀</div>
+              <p>Particles can be in <strong>multiple places</strong> at the same time.</p>
+            </div>
+
+            <div class="curiosity-card">
+              <div class="card-emoji">👻</div>
+              <p>There is <strong>“spooky action at a distance”</strong> (entangled coordination).</p>
+            </div>
+
+            <div class="curiosity-card">
+              <div class="card-emoji">🌌</div>
+              <p>One interpretation says the universe <strong>splits into multiple universes</strong> upon measurement!</p>
+            </div>
+
+            <div class="curiosity-card">
+              <div class="card-emoji">🐈</div>
+              <p>Schrödinger's cat: alive and dead at the same time until opened.</p>
+            </div>
+          </div>
+
+          <div class="summary-pill">
+            <span>✨ All sorts of weird and wild physics!</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 5 -->
+      <section class="slide-card" data-slide="5">
+        <div class="slide-content center-layout">
+          <span class="slide-tag blue-tag">The Natural Assumption</span>
+          <h2 class="slide-heading text-center">You would think, by extension, quantum computing must also be mysterious.</h2>
+
+          <div class="illustration-wrap">
+            <svg viewBox="0 0 240 160" width="220" height="150">
+              <circle cx="120" cy="50" r="28" fill="#f8fafc" stroke="#334155" stroke-width="3"/>
+              <circle cx="112" cy="46" r="3.5" fill="#334155"/>
+              <circle cx="128" cy="46" r="3.5" fill="#334155"/>
+              <path d="M 112 62 Q 120 54 128 62" fill="none" stroke="#334155" stroke-width="3" stroke-linecap="round"/>
+              <path d="M 96 90 Q 75 70 85 45 Q 95 30 102 38" fill="none" stroke="#334155" stroke-width="3" stroke-linecap="round"/>
+              <path d="M 120 78 L 120 135" stroke="#334155" stroke-width="3" stroke-linecap="round"/>
+              <path d="M 120 135 L 100 160" stroke="#334155" stroke-width="3" stroke-linecap="round"/>
+              <path d="M 120 135 L 140 160" stroke="#334155" stroke-width="3" stroke-linecap="round"/>
+              <path d="M 120 95 L 150 115" stroke="#334155" stroke-width="3" stroke-linecap="round"/>
+              <text x="160" y="45" font-family="Caveat, cursive" font-size="34" fill="#6366f1">?</text>
+              <text x="185" y="30" font-family="Caveat, cursive" font-size="28" fill="#f43f5e">?</text>
+              <text x="60" y="40" font-family="Caveat, cursive" font-size="30" fill="#f59e0b">?</text>
+            </svg>
+          </div>
+
+          <div class="conclusion-box">
+            <p>And hence, a simple mental model would be <strong>impossible</strong>.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 6 (Wheel Blueprint & Rotatable Wheel) -->
+      <section class="slide-card" data-slide="6">
+        <div class="slide-content">
+          <span class="slide-tag green-tag">The Counter-Argument</span>
+          <h2 class="slide-heading">However, that argument doesn’t hold weight.</h2>
+          <p class="body-lead">
+            Why? Because classical, everyday computers are also based on some very complex technology, but all they are trying to do is make a <strong>specific mathematical object</strong> be realised in the real world.
+          </p>
+
+          <div class="wheel-interactive-board">
+            <div class="wheel-column blueprint-col">
+              <div class="column-header">
+                <span class="col-icon">📐</span>
+                <span class="col-title">The Mathematical Blueprint</span>
+              </div>
+              <div class="blueprint-canvas-wrap">
+                <svg viewBox="0 0 200 200" width="180" height="180" class="blueprint-svg">
+                  <circle cx="100" cy="100" r="70" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="4 4"/>
+                  <circle cx="100" cy="100" r="12" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+                  <line x1="20" y1="100" x2="180" y2="100" stroke="#2563eb" stroke-width="1" stroke-dasharray="2 2"/>
+                  <line x1="100" y1="20" x2="100" y2="180" stroke="#2563eb" stroke-width="1" stroke-dasharray="2 2"/>
+                  <line x1="100" y1="100" x2="150" y2="50" stroke="#2563eb" stroke-width="1.5"/>
+                  <text x="120" y="70" font-family="Caveat, cursive" font-size="18" fill="#1d4ed8">radius r</text>
+                  <text x="65" y="188" font-family="Caveat, cursive" font-size="14" fill="#1d4ed8">x² + y² = r²</text>
+                </svg>
+              </div>
+              <span class="col-caption">Abstract geometric concept</span>
+            </div>
+
+            <div class="blueprint-arrow">➔</div>
+
+            <div class="wheel-column physical-col">
+              <div class="column-header">
+                <span class="col-icon">⚙️</span>
+                <span class="col-title">The Physical Realisation</span>
+              </div>
+              <div class="wheel-interaction-wrap">
+                <div class="rotatable-wheel" id="interactiveWheel" title="Click and drag to spin me!">
+                  <div class="wheel-hub"></div>
+                  <div class="wheel-spoke s1"></div>
+                  <div class="wheel-spoke s2"></div>
+                  <div class="wheel-spoke s3"></div>
+                  <div class="wheel-marker">●</div>
+                </div>
+              </div>
+              <div class="spin-instruction">
+                <span class="hand-icon">👉</span> <strong>Drag or flick to spin the wheel!</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 7 (Turing Machine & The Big Transition) -->
+      <section class="slide-card" data-slide="7">
+        <div class="slide-content">
+          <span class="slide-tag orange-tag">The Classical Blueprint</span>
+          <h2 class="slide-heading">So what’s the mathematical blueprint of a classical computer? The Turing machine!</h2>
+
+          <!-- Infinite Animated Turing Machine -->
+          <div class="turing-card-box">
+            <div class="tm-infinite-stage">
+              <!-- Robot Head permanently centered over active cell -->
+              <div class="tm-robot-head-fixed">
+                <div class="robot-face">
+                  <span class="robot-eye">●</span>
+                  <span class="robot-eye">●</span>
+                </div>
+                <div class="robot-pointer">▼</div>
+              </div>
+
+              <!-- Infinite Tape Window with fading margins -->
+              <div class="tm-tape-viewport">
+                <div class="tm-tape-track" id="tmTapeTrack"></div>
+              </div>
+            </div>
+
+            <div class="tm-controls-row">
+              <button class="cute-btn primary" id="btnTmStep">Step Head ➔</button>
+              <button class="cute-btn secondary" id="btnTmAuto">Auto Play ▶</button>
+              <button class="cute-btn neutral" id="btnTmReset">Reset ↺</button>
+              <span class="tm-hint-note" id="tmStateText">Head at cell #0 (reads '1')</span>
+            </div>
+          </div>
+
+          <div class="quote-paper-card">
+            <p class="main-body-text">
+              Though the Turing Machine is very simple, even the most sophisticated computers in the world are, at the end of the day, <strong>physical realisations of Turing machines.</strong>
+              If you understand Turing machines, you still have a LOT to learn about computers, but you have got the <strong>mental model right.</strong>
+            </p>
+          </div>
+
+          <div class="transition-question-pill">
+            <span class="star-sparkle">⭐</span>
+            <span><strong>The obvious question now is:</strong> What is the mathematical blueprint of the quantum computer? Can it also give an intuitive understanding of why you can’t make a true quantum computer out of classical parts?</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 8: The #SAT Problem (Real Logic Circuit) -->
+      <section class="slide-card" data-slide="8">
+        <div class="slide-content">
+          <span class="slide-tag red-tag">A Classical Problem</span>
+          <h2 class="slide-heading">Let’s discuss a classical problem first. It is called the <strong>#SAT problem</strong>.</h2>
+          
+          <p class="body-lead">
+            You create a (classical!) logic circuit with <strong>$n$ switches</strong> and <strong>1 output</strong>, and you want to know the total number of times that output is <strong>1</strong>, across all possible combinations of ON and OFF switches.
+          </p>
+
+          <!-- Real Logic Circuit Schematic Diagram -->
+          <div class="circuit-sim-box">
+            <div class="circuit-sim-topbar">
+              <span class="circuit-label">5 Input Switches (Click to toggle or use Auto Cycle):</span>
+              <div class="switches-row" id="satSwitchesRow">
+                <button class="sat-switch-btn" data-idx="0">0</button>
+                <button class="sat-switch-btn" data-idx="1">0</button>
+                <button class="sat-switch-btn" data-idx="2">0</button>
+                <button class="sat-switch-btn" data-idx="3">0</button>
+                <button class="sat-switch-btn" data-idx="4">0</button>
+              </div>
+            </div>
+
+            <!-- Standard IEEE Logic Circuit Schematic SVG with Physical Input Switches -->
+            <div class="circuit-schematic-canvas">
+              <svg viewBox="0 0 680 250" width="100%" height="225" class="logic-circuit-svg">
+                <!-- ================= 5 PHYSICAL INPUT KNIFE SWITCHES ================= -->
+                <!-- Switch x0 (y=35) -->
+                <g class="svg-switch-unit" id="sw-unit-0" data-idx="0" cursor="pointer">
+                  <rect x="10" y="15" width="100" height="38" fill="transparent" class="sw-hit-area"/>
+                  <text x="18" y="39" class="sw-label">x₀</text>
+                  <line x1="28" y1="35" x2="48" y2="35" class="sw-lead-wire"/>
+                  <circle cx="48" cy="35" r="4.5" class="sw-terminal-dot"/>
+                  <path id="sw-blade-0" class="sw-blade blade-open" d="M 48 35 L 85 15"/>
+                  <circle id="sw-knob-0" cx="85" cy="15" r="4" class="sw-knob"/>
+                  <circle cx="95" cy="35" r="4.5" class="sw-terminal-dot"/>
+                  <text id="sw-badge-0" x="95" y="24" class="sw-badge-text">OFF (0)</text>
+                </g>
+
+                <!-- Switch x1 (y=75) -->
+                <g class="svg-switch-unit" id="sw-unit-1" data-idx="1" cursor="pointer">
+                  <rect x="10" y="55" width="100" height="38" fill="transparent" class="sw-hit-area"/>
+                  <text x="18" y="79" class="sw-label">x₁</text>
+                  <line x1="28" y1="75" x2="48" y2="75" class="sw-lead-wire"/>
+                  <circle cx="48" cy="75" r="4.5" class="sw-terminal-dot"/>
+                  <path id="sw-blade-1" class="sw-blade blade-open" d="M 48 75 L 85 55"/>
+                  <circle id="sw-knob-1" cx="85" cy="55" r="4" class="sw-knob"/>
+                  <circle cx="95" cy="75" r="4.5" class="sw-terminal-dot"/>
+                  <text id="sw-badge-1" x="95" y="64" class="sw-badge-text">OFF (0)</text>
+                </g>
+
+                <!-- Switch x2 (y=115) -->
+                <g class="svg-switch-unit" id="sw-unit-2" data-idx="2" cursor="pointer">
+                  <rect x="10" y="95" width="100" height="38" fill="transparent" class="sw-hit-area"/>
+                  <text x="18" y="119" class="sw-label">x₂</text>
+                  <line x1="28" y1="115" x2="48" y2="115" class="sw-lead-wire"/>
+                  <circle cx="48" cy="115" r="4.5" class="sw-terminal-dot"/>
+                  <path id="sw-blade-2" class="sw-blade blade-open" d="M 48 115 L 85 95"/>
+                  <circle id="sw-knob-2" cx="85" cy="95" r="4" class="sw-knob"/>
+                  <circle cx="95" cy="115" r="4.5" class="sw-terminal-dot"/>
+                  <text id="sw-badge-2" x="95" y="104" class="sw-badge-text">OFF (0)</text>
+                </g>
+
+                <!-- Switch x3 (y=155) -->
+                <g class="svg-switch-unit" id="sw-unit-3" data-idx="3" cursor="pointer">
+                  <rect x="10" y="135" width="100" height="38" fill="transparent" class="sw-hit-area"/>
+                  <text x="18" y="159" class="sw-label">x₃</text>
+                  <line x1="28" y1="155" x2="48" y2="155" class="sw-lead-wire"/>
+                  <circle cx="48" cy="155" r="4.5" class="sw-terminal-dot"/>
+                  <path id="sw-blade-3" class="sw-blade blade-open" d="M 48 155 L 85 135"/>
+                  <circle id="sw-knob-3" cx="85" cy="135" r="4" class="sw-knob"/>
+                  <circle cx="95" cy="155" r="4.5" class="sw-terminal-dot"/>
+                  <text id="sw-badge-3" x="95" y="144" class="sw-badge-text">OFF (0)</text>
+                </g>
+
+                <!-- Switch x4 (y=205) -->
+                <g class="svg-switch-unit" id="sw-unit-4" data-idx="4" cursor="pointer">
+                  <rect x="10" y="185" width="100" height="38" fill="transparent" class="sw-hit-area"/>
+                  <text x="18" y="209" class="sw-label">x₄</text>
+                  <line x1="28" y1="205" x2="48" y2="205" class="sw-lead-wire"/>
+                  <circle cx="48" cy="205" r="4.5" class="sw-terminal-dot"/>
+                  <path id="sw-blade-4" class="sw-blade blade-open" d="M 48 205 L 85 185"/>
+                  <circle id="sw-knob-4" cx="85" cy="185" r="4" class="sw-knob"/>
+                  <circle cx="95" cy="205" r="4.5" class="sw-terminal-dot"/>
+                  <text id="sw-badge-4" x="95" y="194" class="sw-badge-text">OFF (0)</text>
+                </g>
+
+                <!-- ================= INPUT WIRES FROM SWITCHES TO GATES ================= -->
+                <!-- x0 -> AND top -->
+                <path id="wire-in-x0" class="circuit-wire" d="M 95 35 L 140 35"/>
+                <!-- x1 -> AND bottom -->
+                <path id="wire-in-x1" class="circuit-wire" d="M 95 75 L 140 75"/>
+                <!-- x2 -> XOR top -->
+                <path id="wire-in-x2" class="circuit-wire" d="M 95 115 L 140 115"/>
+                <!-- x3 -> XOR bottom -->
+                <path id="wire-in-x3" class="circuit-wire" d="M 95 155 L 140 155"/>
+                <!-- x4 -> NOT in -->
+                <path id="wire-in-x4" class="circuit-wire" d="M 95 205 L 140 205"/>
+
+                <!-- ================= STAGE 1 GATES ================= -->
+                <!-- Gate 1: AND (x0, x1) at (140, 25) -->
+                <g id="gate-and-shape" class="gate-symbol-group">
+                  <path class="gate-body" d="M 140 25 L 168 25 A 30 30 0 0 1 198 55 A 30 30 0 0 1 168 85 L 140 85 Z"/>
+                  <text x="154" y="60" class="gate-text">AND</text>
+                </g>
+
+                <!-- Gate 2: XOR (x2, x3) at (140, 105) -->
+                <g id="gate-xor-shape" class="gate-symbol-group">
+                  <path class="gate-body" d="M 140 105 Q 158 135 140 165 Q 175 165 198 135 Q 175 105 140 105 Z"/>
+                  <!-- XOR back curved line -->
+                  <path class="gate-accent-line" d="M 132 105 Q 150 135 132 165"/>
+                  <text x="152" y="140" class="gate-text">XOR</text>
+                </g>
+
+                <!-- Gate 3: NOT (x4) at (140, 190) -->
+                <g id="gate-not-shape" class="gate-symbol-group">
+                  <polygon class="gate-body" points="140,190 182,205 140,220"/>
+                  <!-- Inversion bubble -->
+                  <circle cx="188" cy="205" r="5" class="gate-bubble"/>
+                  <text x="146" y="209" class="gate-text" font-size="10">NOT</text>
+                </g>
+
+                <!-- ================= INTERMEDIATE WIRES ================= -->
+                <!-- AND out -> OR top -->
+                <path id="wire-and-out" class="circuit-wire" d="M 198 55 L 255 55 L 255 85 L 295 85"/>
+                <!-- XOR out -> OR bottom -->
+                <path id="wire-xor-out" class="circuit-wire" d="M 198 135 L 255 135 L 255 115 L 295 115"/>
+                <!-- NOT out -> final AND bottom -->
+                <path id="wire-not-out" class="circuit-wire" d="M 193 205 L 435 205 L 435 155 L 475 155"/>
+
+                <!-- ================= STAGE 2 GATES ================= -->
+                <!-- Gate 4: OR (combines AND & XOR) at (295, 70) -->
+                <g id="gate-or-shape" class="gate-symbol-group">
+                  <path class="gate-body" d="M 295 70 Q 313 100 295 130 Q 330 130 353 100 Q 330 70 295 70 Z"/>
+                  <text x="310" y="105" class="gate-text">OR</text>
+                </g>
+
+                <!-- OR out -> Final AND top -->
+                <path id="wire-or-out" class="circuit-wire" d="M 353 100 L 475 100"/>
+
+                <!-- ================= STAGE 3 GATES ================= -->
+                <!-- Gate 5: Final AND (combines OR out & NOT out) at (475, 85) -->
+                <g id="gate-final-shape" class="gate-symbol-group">
+                  <path class="gate-body" d="M 475 85 L 507 85 A 35 35 0 0 1 542 120 A 35 35 0 0 1 507 155 L 475 155 Z"/>
+                  <text x="490" y="125" class="gate-text">AND</text>
+                </g>
+
+                <!-- Final output wire -> Lightbulb -->
+                <path id="wire-final-out" class="circuit-wire" d="M 542 120 L 595 120"/>
+
+                <!-- Lightbulb connector socket -->
+                <circle cx="595" cy="120" r="5" fill="#64748b"/>
+              </svg>
+
+              <!-- Lightbulb indicator element -->
+              <div class="circuit-bulb-badge" id="satLightbulb">⚪ Output: 0</div>
+            </div>
+
+            <!-- Controls and Tally Bar -->
+            <div class="circuit-controls-and-tally">
+              <div class="circuit-btns-left">
+                <button class="cute-btn secondary" id="btnSatCycle">Auto Cycle ▶</button>
+                <button class="cute-btn neutral" id="btnSatStep">Step Next ➔</button>
+                <button class="cute-btn neutral" id="btnSatReset">Reset ↺</button>
+              </div>
+              
+              <div class="odometer-badge">
+                Tested: <span class="num-highlight" id="satTallyTested">0 / 32</span> &bull; 
+                Total 1s: <span class="num-highlight green" id="satTallyCount">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 9: The Full Truth Table -->
+      <section class="slide-card" data-slide="9">
+        <div class="slide-content">
+          <span class="slide-tag amber-tag">The Implicit Object</span>
+          <h2 class="slide-heading">When you define this problem, a giant, invisible object is defined implicitly:</h2>
+
+          <div class="hero-callout amber-callout">
+            <span class="star-accent">📜</span> <strong>The Full Truth Table.</strong>
+          </div>
+
+          <p class="body-lead">
+            If you could simply write down all <strong>$2^n$</strong> possible input combinations on a sheet of paper and count the matches, the problem would be solved!
+          </p>
+
+          <!-- The Complete 32-Row Truth Table -->
+          <div class="truth-table-full-card">
+            <div class="tt-card-header">
+              <span class="tt-title">Full Truth Table for $n = 5$ ($2^5 = 32$ Rows)</span>
+              <span class="tt-sub">All combinations from 00000 to 11111 matching the circuit</span>
+            </div>
+
+            <div class="tt-columns-wrapper" id="fullTruthTableContainer">
+              <!-- Dynamically populated with all 32 rows in 2 columns -->
+            </div>
+
+            <div class="tt-card-footer">
+              <div class="tt-stat-item">
+                <span>Total Combinations:</span> <strong>32 rows</strong>
+              </div>
+              <div class="tt-stat-item">
+                <span>Matching Solutions (Output = 1):</span> <strong class="green-stat">10 matches</strong>
+              </div>
+              <div class="tt-stat-item">
+                <span>#SAT Answer:</span> <strong class="blue-stat">10</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 10: 300 Switches & The Ghost Table -->
+      <section class="slide-card" data-slide="10">
+        <div class="slide-content">
+          <span class="slide-tag red-tag">The Classical Catch</span>
+          <h2 class="slide-heading">Here’s the catch: for just 300 switches, $2^{300}$ is larger than all the atoms in the entire observable universe!</h2>
+
+          <div class="ghost-card-wrapper">
+            <div class="ghost-visual-left">
+              <svg viewBox="0 0 240 190" width="220" height="180" class="generic-ghost-svg">
+                <!-- Gentle Floating Generic Ghost -->
+                <g class="floating-ghost-actor">
+                  <!-- Ghost Sheet Silhouette with classic wavy bottom hem -->
+                  <path d="M 120 22 C 82 22 72 58 72 95 C 72 120 64 135 70 140 C 78 142 86 130 98 130 C 110 130 114 142 122 142 C 130 142 134 130 146 130 C 158 130 166 142 174 140 C 180 135 172 120 172 95 C 172 58 162 22 120 22 Z" fill="#eff6ff" stroke="#60a5fa" stroke-width="2.5"/>
+                  <!-- Cute Ghost Eyes -->
+                  <ellipse cx="106" cy="72" rx="4.5" ry="6.5" fill="#1e293b"/>
+                  <ellipse cx="136" cy="72" rx="4.5" ry="6.5" fill="#1e293b"/>
+                  <circle cx="104.5" cy="70" r="1.5" fill="#ffffff"/>
+                  <circle cx="134.5" cy="70" r="1.5" fill="#ffffff"/>
+                  <!-- Rosy Cheeks -->
+                  <ellipse cx="98" cy="82" rx="5" ry="3" fill="#fbcfe8"/>
+                  <ellipse cx="144" cy="82" rx="5" ry="3" fill="#fbcfe8"/>
+                  <!-- Friendly Open Mouth -->
+                  <ellipse cx="121" cy="86" rx="4" ry="5.5" fill="#1e293b"/>
+                  <!-- Floating Ghost Arms -->
+                  <path d="M 74 94 Q 54 102 66 114" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M 170 94 Q 190 102 178 114" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round"/>
+                  <!-- Speech Bubble with Ghost Emoji -->
+                  <rect x="142" y="28" width="90" height="28" rx="14" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+                  <text x="152" y="47" font-family="Caveat, cursive" font-size="15" font-weight="700" fill="#1d4ed8">"Booo! 👻"</text>
+                </g>
+                <!-- Tiny Laptop on Desk below holding 1 single row -->
+                <g class="laptop-desk-group">
+                  <!-- Laptop Base -->
+                  <rect x="70" y="160" width="100" height="12" rx="3" fill="#94a3b8"/>
+                  <rect x="105" y="162" width="30" height="3" rx="1.5" fill="#cbd5e1"/>
+                  <!-- Laptop Screen -->
+                  <rect x="82" y="118" width="76" height="46" rx="3" fill="#334155"/>
+                  <rect x="86" y="122" width="68" height="38" rx="2" fill="#f8fafc"/>
+                  <!-- Yellow Post-it Note holding [0 1 1 0] -->
+                  <rect x="91" y="127" width="58" height="26" rx="2" fill="#fef08a" stroke="#facc15" stroke-width="1"/>
+                  <text x="96" y="144" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#854d0e">[0 1 1 0]</text>
+                  <text x="75" y="184" font-family="Caveat, cursive" font-size="13" fill="#64748b">Only 1 row at a time in CPU registers!</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="ghost-text-right">
+              <div class="callout-pill red-pill">👻 In a classical computer, that giant table is a GHOST</div>
+              <p>It does <strong>NOT</strong> physically exist inside your laptop. Your CPU only holds <strong>one single row</strong> ($n$ bits) in its registers at any microsecond.</p>
+              <p>The full table of $2^n$ rows lives purely as an abstract mathematical idea in our heads.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 11: The Quantum Magic & 2ⁿ State Vector -->
+      <section class="slide-card" data-slide="11">
+        <div class="slide-content">
+          <span class="slide-tag purple-tag">The Quantum Reality</span>
+          <h2 class="slide-heading">Now, here is the magic of quantum computing:</h2>
+          
+          <p class="body-lead">
+            In a quantum computer, that exponentially huge object <strong>actually exists in the real world.</strong>
+            When you have $n$ qubits, nature doesn’t just give you $n$ separate switches. It gives you a <strong>state vector living in a $2^n$-dimensional complex vector space.</strong>
+          </p>
+
+          <!-- 5-Qubit Circuit + Gray Code Snake Grid -->
+          <div class="quantum-circuit-snake-box">
+            <div class="circuit-schematic-mini">
+              <span class="schematic-label">5-Qubit Circuit with Random Gates (H, CNOT, SWAP, S):</span>
+              <svg viewBox="0 0 540 85" width="100%" height="75" class="q-circuit-svg">
+                <!-- 5 Qubit Rail Wires -->
+                <line x1="40" y1="12" x2="520" y2="12" stroke="#cbd5e1" stroke-width="2"/>
+                <line x1="40" y1="28" x2="520" y2="28" stroke="#cbd5e1" stroke-width="2"/>
+                <line x1="40" y1="44" x2="520" y2="44" stroke="#cbd5e1" stroke-width="2"/>
+                <line x1="40" y1="60" x2="520" y2="60" stroke="#cbd5e1" stroke-width="2"/>
+                <line x1="40" y1="76" x2="520" y2="76" stroke="#cbd5e1" stroke-width="2"/>
+
+                <text x="10" y="15" font-family="JetBrains Mono" font-size="10" fill="#64748b">q₀</text>
+                <text x="10" y="31" font-family="JetBrains Mono" font-size="10" fill="#64748b">q₁</text>
+                <text x="10" y="47" font-family="JetBrains Mono" font-size="10" fill="#64748b">q₂</text>
+                <text x="10" y="63" font-family="JetBrains Mono" font-size="10" fill="#64748b">q₃</text>
+                <text x="10" y="79" font-family="JetBrains Mono" font-size="10" fill="#64748b">q₄</text>
+
+                <!-- Gates -->
+                <rect x="70" y="4" width="16" height="16" rx="3" fill="#60a5fa"/><text x="75" y="16" font-family="JetBrains Mono" font-size="10" fill="#fff">H</text>
+                <rect x="130" y="20" width="16" height="16" rx="3" fill="#c084fc"/><text x="135" y="32" font-family="JetBrains Mono" font-size="10" fill="#fff">S</text>
+                <!-- CNOT -->
+                <circle cx="210" cy="12" r="3.5" fill="#1e293b"/>
+                <line x1="210" y1="12" x2="210" y2="44" stroke="#1e293b" stroke-width="1.5"/>
+                <circle cx="210" cy="44" r="7" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+                <!-- SWAP -->
+                <line x1="280" y1="28" x2="280" y2="60" stroke="#ef4444" stroke-width="1.5"/>
+                <text x="276" y="32" font-family="JetBrains Mono" font-size="12" fill="#ef4444">×</text>
+                <text x="276" y="64" font-family="JetBrains Mono" font-size="12" fill="#ef4444">×</text>
+                <!-- More Gates -->
+                <rect x="350" y="68" width="16" height="16" rx="3" fill="#60a5fa"/><text x="355" y="80" font-family="JetBrains Mono" font-size="10" fill="#fff">H</text>
+                <rect x="420" y="36" width="16" height="16" rx="3" fill="#34d399"/><text x="425" y="48" font-family="JetBrains Mono" font-size="10" fill="#fff">Z</text>
+              </svg>
+            </div>
+
+            <!-- Snake Grid -->
+            <div class="snake-board-wrap">
+              <div class="snake-legend">
+                <span><strong>$2^5 = 32$ States (Gray Code Order):</strong> Brightness = Amplitude | Colour = Phase</span>
+              </div>
+              <div class="snake-grid-container" id="snakeGridContainer"></div>
+              <div class="snake-tooltip" id="snakeCellTooltip">Hover over any cell to inspect its amplitude and phase</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 12: Entanglement vs Compressibility (Two Full-Width Rows Separated by VS) -->
+      <section class="slide-card" data-slide="12">
+        <div class="slide-content">
+          <span class="slide-tag green-tag">The Secret Sauce</span>
+          <h2 class="slide-heading">Compressible Product vs. The Entangled Beast</h2>
+          
+          <p class="body-lead">
+            However, if there is <strong>no entanglement</strong> between qubits, the state vector is easily compressible — i.e. it doesn’t contain an exponential amount of information, and can be reduced to a product of the state vectors of the individual qubits.
+          </p>
+
+          <div class="entangle-rows-container">
+            <!-- Row 1: Without Entanglement -->
+            <div class="entangle-row separable-row">
+              <div class="entangle-row-header">
+                <span class="row-tag blue-tag">🟢 WITHOUT ENTANGLEMENT (Separable State)</span>
+                <span class="row-badge-note">Easily Compressible & Classical</span>
+              </div>
+              <div class="entangle-eq-box">
+                <div class="math-eq-display">
+                  $$(a_0|0\rangle + b_0|1\rangle) \otimes (a_1|0\rangle + b_1|1\rangle) \otimes (a_2|0\rangle + b_2|1\rangle) \otimes \dots \otimes (a_{n-1}|0\rangle + b_{n-1}|1\rangle)$$
+                </div>
+              </div>
+              <p class="entangle-row-desc">
+                The state factors completely into individual independent qubits. It requires only <strong>$2 \times n$ numbers</strong> to describe! Any everyday classical smartphone can effortlessly simulate this in milliseconds.
+              </p>
+            </div>
+
+            <!-- Centered VS Divider -->
+            <div class="entangle-vs-divider">
+              <div class="vs-divider-line"></div>
+              <div class="vs-divider-circle">VS</div>
+              <div class="vs-divider-line"></div>
+            </div>
+
+            <!-- Row 2: With Entanglement -->
+            <div class="entangle-row entangled-row">
+              <div class="entangle-row-header">
+                <span class="row-tag purple-tag">🟣 WITH ENTANGLEMENT (Irreducible Superposition)</span>
+                <span class="row-badge-note">The Exponential Beast</span>
+              </div>
+              <div class="entangle-eq-box">
+                <div class="math-eq-display">
+                  $$|\psi\rangle = \sum_{x \in \{0,1\}^n} c_x |x\rangle = c_{00\dots0}|00\dots0\rangle + c_{00\dots1}|00\dots1\rangle + \dots + c_{11\dots1}|11\dots1\rangle$$
+                </div>
+              </div>
+              <p class="entangle-row-desc">
+                This factorization is <strong>strictly impossible</strong> in general! You cannot split the qubits apart. You have an irreducible <strong>$2^n$-dimensional state vector</strong> physically instantiated in the laboratory, created from just $n$ physical qubits!
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive 2-Qubit Entanglement Lab (Repeated 1,024 Times) -->
+          <div class="entanglement-lab-box">
+            <div class="entangle-lab-header">
+              <div class="lab-title-group">
+                <span class="lab-badge">🦋 Live Quantum Test: 2 Qubits (Repeated 1,024 Times)</span>
+                <span class="lab-subtitle">See how entanglement changes the measured frequency of outcomes</span>
+              </div>
+              <div class="lab-controls-group">
+                <button class="cute-btn primary" id="btnRunEntanglementCompare">Run 1,024 Times on Both ⚡</button>
+                <button class="cute-btn neutral" id="btnToggleEntangleEngine">⚙️ Simulator / Atlas Mode</button>
+              </div>
+            </div>
+
+            <!-- Explanation of the Two Tested Quantum States -->
+            <div class="entangle-state-explainer-row">
+              <div class="state-explainer-card blue-border">
+                <div class="explainer-title">
+                  <span class="explainer-bullet">1.</span>
+                  <strong>The Separable State: $|+\rangle \otimes |+\rangle$</strong>
+                </div>
+                <p class="explainer-desc">
+                  Two independent qubits, each prepared in a 50/50 superposition like two independent tossed coins. Because they have zero coupling, knowing the outcome of Qubit 0 tells you <em>nothing</em> about Qubit 1.
+                </p>
+                <div class="state-math-pill">$$|\psi\rangle = \tfrac{1}{2}(|00\rangle + |01\rangle + |10\rangle + |11\rangle)$$</div>
+              </div>
+
+              <div class="state-explainer-card purple-border">
+                <div class="explainer-title">
+                  <span class="explainer-bullet">2.</span>
+                  <strong>The Entangled Bell State: $|\Phi^+\rangle$</strong>
+                </div>
+                <p class="explainer-desc">
+                  The two qubits are linked together by a quantum gate into an entangled state. They no longer have separate individual identities: if Qubit 0 collapses to <strong>0</strong>, Qubit 1 is <em>guaranteed</em> to be <strong>0</strong>; if <strong>1</strong>, Qubit 1 is <em>guaranteed</em> to be <strong>1</strong>!
+                </p>
+                <div class="state-math-pill">$$|\Phi^+\rangle = \tfrac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$$</div>
+              </div>
+            </div>
+
+            <div class="lab-instruction-note">
+              <span>👇 <strong>What this test shows:</strong> If you prepare each state and measure it, then prepare the exact same state again and measure it, and repeat this 1,024 times — here is the frequency table of outcomes you get:</span>
+            </div>
+
+            <!-- Progress & Source Status Banner -->
+            <div class="lab-status-banner" id="entangleStatusBanner">
+              <span class="status-dot-mini" id="entangleStatusDot"></span>
+              <span class="status-text-mini" id="entangleStatusText">Engine ready: Local Quantum Sim (Zero key required)</span>
+            </div>
+
+            <!-- Side-by-Side Comparison Columns -->
+            <div class="entangle-compare-grid">
+              <!-- Left Column: Unentangled Product State -->
+              <div class="compare-card product-card">
+                <div class="card-top">
+                  <span class="compare-tag blue">🟢 Unentangled (Product State)</span>
+                  <span class="card-metric" id="productMetricText">Correlation: 0.00 (Independent)</span>
+                </div>
+                <div class="histogram-bars-row" id="productBarsRow"></div>
+                <div class="card-footer-takeaway blue">
+                  <span>💡 <strong>Result:</strong> Flat ~25% split. Measuring qubit 0 gives you <em>zero information</em> about qubit 1!</span>
+                </div>
+              </div>
+
+              <!-- Right Column: Entangled Bell State -->
+              <div class="compare-card entangled-card">
+                <div class="card-top">
+                  <span class="compare-tag purple">🟣 Entangled (Bell State)</span>
+                  <span class="card-metric" id="entangledMetricText">Correlation: 0.99 (Inseparable)</span>
+                </div>
+                <div class="histogram-bars-row" id="entangledBarsRow"></div>
+                <div class="card-footer-takeaway purple">
+                  <span>🔥 <strong>Result:</strong> Only |00⟩ and |11⟩ appear! Measuring qubit 0 <em>instantly determines</em> qubit 1!</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 13: Affecting the State Vector & The Lever -->
+      <section class="slide-card" data-slide="13">
+        <div class="slide-content">
+          <span class="slide-tag orange-tag">Physical Control</span>
+          <h2 class="slide-heading">You might ask — how is this different from the exponential object just being a “ghost”?</h2>
+          
+          <p class="body-lead">
+            Well, the cool part is that, unlike the classical situation, you can make qubits go through quantum gates to <strong>affect and alter this state vector!</strong>
+            So a 300 qubit quantum computer, irreducibly entangled, would be manipulating a <strong>$2^{300}$ long state vector</strong>. Isn’t that crazy?
+          </p>
+
+          <!-- Lever Lifting the Earth Illustration -->
+          <div class="archimedes-lever-box">
+            <svg viewBox="0 0 520 180" width="100%" height="160">
+              <!-- Rock Fulcrum -->
+              <polygon points="170,140 190,105 210,140" fill="#94a3b8" stroke="#64748b" stroke-width="2"/>
+              <!-- Wooden Lever Plank -->
+              <line x1="50" y1="125" x2="420" y2="85" stroke="#b45309" stroke-width="8" stroke-linecap="round"/>
+              
+              <!-- Qubit pushing left end -->
+              <circle cx="65" cy="115" r="14" fill="#60a5fa" stroke="#2563eb" stroke-width="2"/>
+              <text x="58" y="119" font-family="JetBrains Mono" font-size="10" fill="#fff">300</text>
+              <text x="35" y="148" font-family="Caveat" font-size="15" fill="#2563eb">300 Qubits</text>
+              
+              <!-- Giant Earth on right end -->
+              <circle cx="390" cy="70" r="48" fill="#ecfdf5" stroke="#10b981" stroke-width="3"/>
+              <!-- Continents & Latitude rings -->
+              <ellipse cx="390" cy="70" rx="46" ry="18" fill="none" stroke="#6ee7b7" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <text x="345" y="75" font-family="Plus Jakarta Sans" font-weight="800" font-size="13" fill="#047857">2³⁰⁰ Vector</text>
+            </svg>
+            <span class="footnote-text">A small set of physical knobs manipulating a colossal mathematical world!</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 14: The Catch: Measurement Collapse -->
+      <section class="slide-card" data-slide="14">
+        <div class="slide-content">
+          <span class="slide-tag red-tag">The Catch</span>
+          <h2 class="slide-heading">Ah! But here’s the catch —</h2>
+          
+          <p class="body-lead">
+            You cannot actually see and probe the state vector directly.
+            What you can do is make a <strong>measurement</strong>, which forces the state vector to collapse into <strong>just one possibility</strong> among the $2^n$. That’s all you can probe.
+          </p>
+
+          <!-- Interactive Ket State Sum and Collapse (Powered by Moth Quantum graph-v1) -->
+          <div class="ket-collapse-box">
+            <div class="ket-collapse-header">
+              <span class="ket-box-badge">🦋 Moth Quantum graph-v1 engine</span>
+              <span class="ket-box-note">3 physical qubits prepared in an 8-state superposition</span>
+            </div>
+
+            <div class="ket-state-display" id="ketStateDisplay">
+              $$|\psi\rangle = \tfrac{1}{2}|000\rangle - \tfrac{1}{2}|001\rangle + \left(\tfrac{1}{4} + \tfrac{1}{4}i\right)|010\rangle + \tfrac{1}{\sqrt{8}}|011\rangle + \tfrac{1}{4}|100\rangle - \tfrac{1}{4}|101\rangle + \tfrac{i}{4}|110\rangle + \tfrac{1}{4}|111\rangle$$
+            </div>
+
+            <!-- Normalized Amplitude-to-Probability Reference Guide -->
+            <div class="ket-guide-card">
+              <div class="ket-guide-title">
+                <span>✦ <strong>Normalized Amplitudes $\to$ Probabilities ($|c|^2$):</strong></span>
+                <span class="guide-sum-tag">Total Probability $= 100\%$ ($1,024$ runs)</span>
+              </div>
+              <div class="ket-guide-grid">
+                <div class="guide-cell">
+                  <span class="guide-state">|000⟩, |001⟩</span>
+                  <span class="guide-calc">$|\pm\tfrac{1}{2}|^2 = \tfrac{1}{4}$</span>
+                  <span class="guide-pct">25.0% <small>(256 runs)</small></span>
+                </div>
+                <div class="guide-cell highlight">
+                  <span class="guide-state">|010⟩ <span class="complex-tag">Complex</span></span>
+                  <span class="guide-calc">$|\tfrac{1}{4} + \tfrac{1}{4}i|^2 = \tfrac{2}{16} = \tfrac{1}{8}$</span>
+                  <span class="guide-pct">12.5% <small>(128 runs)</small></span>
+                </div>
+                <div class="guide-cell">
+                  <span class="guide-state">|011⟩</span>
+                  <span class="guide-calc">$|\tfrac{1}{\sqrt{8}}|^2 = \tfrac{1}{8}$</span>
+                  <span class="guide-pct">12.5% <small>(128 runs)</small></span>
+                </div>
+                <div class="guide-cell">
+                  <span class="guide-state">|100⟩, |101⟩, |110⟩, |111⟩</span>
+                  <span class="guide-calc">$|\pm\tfrac{1}{4}|^2 = |\tfrac{i}{4}|^2 = \tfrac{1}{16}$</span>
+                  <span class="guide-pct">6.25% <small>(64 runs each)</small></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="collapse-status-banner" id="ketStatusBanner">
+              <span class="status-dot-mini" id="ketStatusDot"></span>
+              <span class="status-text-mini" id="ketStatusText">Engine ready: Local Quantum Sim (Zero key required)</span>
+            </div>
+
+            <div class="collapse-action-row">
+              <button class="cute-btn primary" id="btnKetMeasure">⚡ Measure State (Repeat 1,024 Times) ➔</button>
+              <button class="cute-btn neutral" id="btnKetReset" style="display:none;">Prepare Superposition Again ↺</button>
+              <button class="cute-btn ghost-btn" id="btnKetEngineToggle">⚙️ Engine Settings</button>
+            </div>
+
+            <!-- Single Physical Collapsed Outcome Card -->
+            <div class="collapse-receipt-card" id="collapseReceipt" style="display:none;"></div>
+
+            <!-- Frequency table from repeating preparation and measurement 1,024 times -->
+            <div class="ket-histogram-wrap" id="ketHistogramWrap" style="display:none;">
+              <div class="histogram-head">
+                <span class="hist-title">📊 Frequency Table of Outcomes (1,024 Runs)</span>
+                <span class="hist-sub">If you prepare this quantum state and measure it, then prepare the exact same state again and measure it, and repeat this cycle a total of 1,024 times, this is the frequency table you get:</span>
+              </div>
+              <div class="ket-bars-row" id="ketBarsRow"></div>
+              <div class="hist-receipt-meta" id="ketReceiptMeta"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 15: Concentrating Amplitudes & Grover -->
+      <section class="slide-card" data-slide="15">
+        <div class="slide-content">
+          <span class="slide-tag blue-tag">The Core Strategy</span>
+          <h2 class="slide-heading">How quantum algorithms actually work:</h2>
+          
+          <p class="body-lead">
+            Pretty much all quantum algorithms are all about manipulating the state vector using quantum gates, such that the amplitudes in the state vector (the relative “weight” of each possibility) becomes <strong>concentrated in one or very few possibilities</strong>, revealing the answer!
+          </p>
+
+          <!-- Grover's Algorithm Amplification Chart -->
+          <div class="grover-demo-box">
+            <div class="grover-bars-row" id="groverBarsContainer"></div>
+            <div class="grover-controls-row">
+              <button class="cute-btn primary" id="btnGroverStep">Amplify Target |101⟩ ➔</button>
+              <button class="cute-btn neutral" id="btnGroverReset">Reset ↺</button>
+              <span class="grover-step-note" id="groverStepText">Click Amplify to watch the target probability surge!</span>
+            </div>
+          </div>
+
+          <!-- 3Blue1Brown External Recommendation Card -->
+          <a href="https://www.youtube.com/watch?v=RQWpF2Gb-gU" target="_blank" rel="noopener noreferrer" class="b3b-link-card">
+            <span class="b3b-icon">📺</span>
+            <div class="b3b-info">
+              <span class="b3b-title">Highly Recommended: 3Blue1Brown’s video on Grover’s Algorithm</span>
+              <span class="b3b-sub">A visual masterpiece explaining how quantum amplitudes rotate and amplify.</span>
+            </div>
+            <span class="b3b-arrow">↗</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Slide 16: The Cat & High-Dimensional Stick -->
+      <section class="slide-card" data-slide="16">
+        <div class="slide-content">
+          <span class="slide-tag purple-tag">A Fun Metaphor</span>
+          <h2 class="slide-heading">A fun metaphor: A cat playing with a high-dimensional stick</h2>
+          
+          <p class="body-lead">
+            Think of it like a cat batting around a complicated, high-dimensional object. Even with just a few paws, you can manipulate this rich mathematical object with quantum gates. But you can never view the full object directly — when you make a measurement, you simply let the stick fall flat and observe a single outcome!
+            <br><span style="font-size: 0.88rem; color: #64748b; font-style: italic;">(It’s just a cute intuitive animation, not literal physics, but it captures the spirit of manipulating a huge hidden state and collapsing it!)</span>
+          </p>
+
+          <!-- Duo Cat Illustration Panels -->
+          <div class="cat-duo-container">
+            
+            <!-- Left Illustration: Cat on its back with all 4 paws in the air playing with High-Dimensional Object -->
+            <div class="cat-panel">
+              <div class="cat-panel-header">
+                <span class="panel-step-badge">1. Manipulation</span>
+                <span class="panel-step-title">Manipulating in high-dimensional space</span>
+              </div>
+              <div class="cat-svg-canvas">
+                <svg viewBox="0 0 320 220" width="100%" height="200" class="cat-highdim-svg">
+                  <!-- Floor line -->
+                  <line x1="20" y1="195" x2="300" y2="195" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4"/>
+                  
+                  <!-- Floating High-Dimensional Complex Manifold Object -->
+                  <g class="floating-highdim-group" id="highDimFloating">
+                    <!-- Dimensional Orbital Projection Rings -->
+                    <ellipse cx="160" cy="70" rx="60" ry="24" fill="none" stroke="#8b5cf6" stroke-width="1.6" stroke-dasharray="4 3" transform="rotate(-25 160 70)"/>
+                    <ellipse cx="160" cy="70" rx="60" ry="24" fill="none" stroke="#06b6d4" stroke-width="1.6" stroke-dasharray="4 3" transform="rotate(35 160 70)"/>
+                    <ellipse cx="160" cy="70" rx="42" ry="42" fill="none" stroke="#ec4899" stroke-width="1.3" opacity="0.6"/>
+
+                    <!-- Translucent Multi-Faceted High-Dimensional Polygons -->
+                    <polygon points="160,22 202,44 216,82 186,116 134,116 104,82 118,44" fill="rgba(139, 92, 246, 0.18)" stroke="#8b5cf6" stroke-width="1.8"/>
+                    <polygon points="160,36 188,52 198,80 178,102 142,102 122,80 132,52" fill="rgba(6, 182, 212, 0.2)" stroke="#06b6d4" stroke-width="1.5"/>
+                    <polygon points="160,22 198,80 142,102" fill="rgba(236, 72, 153, 0.16)"/>
+                    <polygon points="160,116 122,80 188,52" fill="rgba(245, 158, 11, 0.16)"/>
+                    <polygon points="118,44 216,82 134,116" fill="rgba(99, 102, 241, 0.14)"/>
+                    <polygon points="202,44 104,82 186,116" fill="rgba(20, 184, 166, 0.14)"/>
+
+                    <!-- Intricate Cross-Dimensional Lattice Chords -->
+                    <line x1="160" y1="22" x2="160" y2="116" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="3 2"/>
+                    <line x1="104" y1="82" x2="216" y2="82" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="3 2"/>
+                    <line x1="118" y1="44" x2="186" y2="116" stroke="#ec4899" stroke-width="1.4"/>
+                    <line x1="202" y1="44" x2="134" y2="116" stroke="#3b82f6" stroke-width="1.4"/>
+                    <line x1="160" y1="36" x2="160" y2="102" stroke="#f59e0b" stroke-width="1.4"/>
+                    <line x1="132" y1="52" x2="198" y2="80" stroke="#8b5cf6" stroke-width="1.2"/>
+                    <line x1="188" y1="52" x2="122" y2="80" stroke="#06b6d4" stroke-width="1.2"/>
+
+                    <!-- Glowing Multidimensional Projection Nodes -->
+                    <circle cx="160" cy="22" r="3.5" fill="#8b5cf6"/>
+                    <circle cx="202" cy="44" r="3.5" fill="#06b6d4"/>
+                    <circle cx="216" cy="82" r="3.5" fill="#ec4899"/>
+                    <circle cx="186" cy="116" r="3.5" fill="#f59e0b"/>
+                    <circle cx="134" cy="116" r="3.5" fill="#3b82f6"/>
+                    <circle cx="104" cy="82" r="3.5" fill="#10b981"/>
+                    <circle cx="118" cy="44" r="3.5" fill="#a855f7"/>
+
+                    <!-- Inner Nodes & Central Core -->
+                    <circle cx="160" cy="36" r="2.5" fill="#ec4899"/>
+                    <circle cx="188" cy="52" r="2.5" fill="#f59e0b"/>
+                    <circle cx="198" cy="80" r="2.5" fill="#06b6d4"/>
+                    <circle cx="178" cy="102" r="2.5" fill="#8b5cf6"/>
+                    <circle cx="142" cy="102" r="2.5" fill="#3b82f6"/>
+                    <circle cx="122" cy="80" r="2.5" fill="#10b981"/>
+                    <circle cx="132" cy="52" r="2.5" fill="#a855f7"/>
+                    <circle cx="160" cy="70" r="4.5" fill="#ffffff" stroke="#8b5cf6" stroke-width="2"/>
+
+                    <!-- Quantum Sparkles -->
+                    <text x="84" y="48" font-size="14" fill="#a855f7">✦</text>
+                    <text x="226" y="56" font-size="14" fill="#06b6d4">✧</text>
+                    <text x="220" y="113" font-size="12" fill="#ec4899">✦</text>
+                    <text x="88" y="110" font-size="12" fill="#f59e0b">✧</text>
+                  </g>
+
+                  <!-- Cute Cat Lying on its Back on the Floor with ALL 4 PAWS IN THE AIR -->
+                  <g class="cat-on-back-actor">
+                    <!-- Long curved cat tail curling on floor -->
+                    <path d="M 85 184 C 60 186 48 174 54 160 C 60 148 72 152 68 162 C 64 172 74 180 88 178" fill="#fdba74" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M 54 168 Q 58 166 60 170 M 60 156 Q 64 154 66 158" stroke="#c2410c" stroke-width="2" stroke-linecap="round"/>
+                    
+                    <!-- Rounded feline body lying horizontal on floor -->
+                    <ellipse cx="162" cy="180" rx="48" ry="18" fill="#fdba74" stroke="#ea580c" stroke-width="2.5"/>
+                    <ellipse cx="162" cy="178" rx="36" ry="11" fill="#fff7ed"/>
+                    <!-- Flank tabby stripes -->
+                    <path d="M 148 186 Q 150 180 154 184" stroke="#c2410c" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M 166 186 Q 168 180 172 184" stroke="#c2410c" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M 184 186 Q 186 180 190 184" stroke="#c2410c" stroke-width="2" stroke-linecap="round"/>
+                    
+                    <!-- Feline Head with cheek tufts -->
+                    <ellipse cx="96" cy="172" rx="18" ry="16" fill="#fdba74" stroke="#ea580c" stroke-width="2.5"/>
+                    <!-- Pointed triangular cat ears with pink inner fuzz -->
+                    <polygon points="82,162 68,144 88,150" fill="#fdba74" stroke="#ea580c" stroke-width="2"/>
+                    <polygon points="80,160 72,148 84,152" fill="#fbcfe8"/>
+                    <polygon points="98,158 98,138 112,152" fill="#fdba74" stroke="#ea580c" stroke-width="2"/>
+                    <polygon points="100,156 100,143 109,151" fill="#fbcfe8"/>
+                    
+                    <!-- Forehead Tabby 'M' stripes -->
+                    <path d="M 88 160 L 90 165 M 95 158 L 95 165 M 101 160 L 100 165" stroke="#c2410c" stroke-width="1.6" stroke-linecap="round"/>
+                    
+                    <!-- Happy Sleeping / Smiling Eyes (^ . ^) -->
+                    <path d="M 82 170 Q 87 165 92 170" fill="none" stroke="#7c2d12" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M 98 169 Q 103 164 108 169" fill="none" stroke="#7c2d12" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Cute pink triangular nose & mouth -->
+                    <polygon points="93,174 97,174 95,177" fill="#f43f5e"/>
+                    <path d="M 91 178 Q 95 181 95 177 Q 95 181 99 178" fill="none" stroke="#7c2d12" stroke-width="1.6"/>
+                    <!-- Rosy cheeks -->
+                    <circle cx="82" cy="175" r="3" fill="#fecdd3"/>
+                    <circle cx="108" cy="174" r="3" fill="#fecdd3"/>
+
+                    <!-- Long Cat Whiskers -->
+                    <line x1="78" y1="172" x2="62" y2="169" stroke="#9a3412" stroke-width="1.3" stroke-linecap="round"/>
+                    <line x1="78" y1="175" x2="60" y2="176" stroke="#9a3412" stroke-width="1.3" stroke-linecap="round"/>
+                    <line x1="78" y1="178" x2="63" y2="183" stroke="#9a3412" stroke-width="1.3" stroke-linecap="round"/>
+                    <line x1="108" y1="171" x2="124" y2="168" stroke="#9a3412" stroke-width="1.3" stroke-linecap="round"/>
+                    <line x1="108" y1="174" x2="126" y2="175" stroke="#9a3412" stroke-width="1.3" stroke-linecap="round"/>
+                    <line x1="108" y1="177" x2="123" y2="182" stroke="#9a3412" stroke-width="1.3" stroke-linecap="round"/>
+
+                    <!-- ================= ALL 4 PAWS UP IN THE AIR ================= -->
+                    <!-- Paw 1: Front Left Paw reaching up -->
+                    <path d="M 128 172 Q 124 145 130 126" fill="none" stroke="#ea580c" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M 128 172 Q 124 145 130 126" fill="none" stroke="#fdba74" stroke-width="5" stroke-linecap="round"/>
+                    <circle cx="130" cy="124" r="6.5" fill="#fdba74" stroke="#ea580c" stroke-width="1.8"/>
+                    <ellipse cx="130" cy="125" rx="3.2" ry="2.6" fill="#f43f5e"/>
+                    <circle cx="127" cy="119" r="1.3" fill="#f43f5e"/>
+                    <circle cx="130" cy="117.5" r="1.3" fill="#f43f5e"/>
+                    <circle cx="133" cy="119" r="1.3" fill="#f43f5e"/>
+
+                    <!-- Paw 2: Front Right Paw reaching up -->
+                    <path d="M 148 172 Q 148 140 152 120" fill="none" stroke="#ea580c" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M 148 172 Q 148 140 152 120" fill="none" stroke="#fdba74" stroke-width="5" stroke-linecap="round"/>
+                    <circle cx="152" cy="118" r="6.5" fill="#fdba74" stroke="#ea580c" stroke-width="1.8"/>
+                    <ellipse cx="152" cy="119" rx="3.2" ry="2.6" fill="#f43f5e"/>
+                    <circle cx="149" cy="113" r="1.3" fill="#f43f5e"/>
+                    <circle cx="152" cy="111.5" r="1.3" fill="#f43f5e"/>
+                    <circle cx="155" cy="113" r="1.3" fill="#f43f5e"/>
+
+                    <!-- Paw 3: Back Left Paw kicked up -->
+                    <path d="M 172 174 Q 172 142 176 122" fill="none" stroke="#ea580c" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M 172 174 Q 172 142 176 122" fill="none" stroke="#fdba74" stroke-width="5" stroke-linecap="round"/>
+                    <circle cx="176" cy="120" r="7" fill="#fdba74" stroke="#ea580c" stroke-width="1.8"/>
+                    <ellipse cx="176" cy="121" rx="3.5" ry="2.8" fill="#f43f5e"/>
+                    <circle cx="173" cy="115" r="1.4" fill="#f43f5e"/>
+                    <circle cx="176" cy="113.5" r="1.4" fill="#f43f5e"/>
+                    <circle cx="179" cy="115" r="1.4" fill="#f43f5e"/>
+
+                    <!-- Paw 4: Back Right Paw kicked up -->
+                    <path d="M 194 176 Q 198 146 200 128" fill="none" stroke="#ea580c" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M 194 176 Q 198 146 200 128" fill="none" stroke="#fdba74" stroke-width="5" stroke-linecap="round"/>
+                    <circle cx="200" cy="126" r="7" fill="#fdba74" stroke="#ea580c" stroke-width="1.8"/>
+                    <ellipse cx="200" cy="127" rx="3.5" ry="2.8" fill="#f43f5e"/>
+                    <circle cx="197" cy="121" r="1.4" fill="#f43f5e"/>
+                    <circle cx="200" cy="119.5" r="1.4" fill="#f43f5e"/>
+                    <circle cx="203" cy="121" r="1.4" fill="#f43f5e"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="cat-panel-caption">
+                All 4 paws playfully manipulate the high-dimensional object in state space
+              </div>
+            </div>
+
+            <!-- Right Illustration: Cat staring at stick falling flat with fading high-dimensional overlay -->
+            <div class="cat-panel">
+              <div class="cat-panel-header">
+                <span class="panel-step-badge red-badge">2. Measurement</span>
+                <span class="panel-step-title">Collapsing to a single outcome</span>
+              </div>
+              <div class="cat-svg-canvas">
+                <svg viewBox="0 0 320 220" width="100%" height="200" class="cat-stick-svg">
+                  <!-- Floor line -->
+                  <line x1="15" y1="195" x2="305" y2="195" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4"/>
+                  
+                  <!-- Stick Pivot Anchor on Floor (x=130, y=195) -->
+                  <circle cx="130" cy="195" r="5.5" fill="#64748b"/>
+                  
+                  <!-- Pivoting Stick Arm (rotates around 130px 195px fully flat to left or right) -->
+                  <g id="stickPivotArm" style="transform-origin: 130px 195px; transform: rotate(0deg); transition: transform 0.8s cubic-bezier(0.2, 0.85, 0.35, 1.15);">
+                    <!-- The 1D Physical Stick (length 115px) -->
+                    <line x1="130" y1="195" x2="130" y2="80" stroke="#854d0e" stroke-width="7" stroke-linecap="round"/>
+                    <circle cx="130" cy="80" r="5" fill="#b45309"/>
+
+                    <!-- Overlaid Semi-Transparent High-Dimensional Shape that becomes 0% opacity -->
+                    <g id="stickHighDimOverlay" style="opacity: 0.85; transition: opacity 0.75s ease-out;">
+                      <!-- Rings -->
+                      <ellipse cx="130" cy="135" rx="46" ry="18" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="3 2" transform="rotate(-20 130 135)"/>
+                      <ellipse cx="130" cy="135" rx="46" ry="18" fill="none" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="3 2" transform="rotate(30 130 135)"/>
+                      
+                      <!-- Translucent polygonal facets -->
+                      <polygon points="130,95 160,112 170,140 150,165 110,165 90,140 100,112" fill="rgba(139, 92, 246, 0.22)" stroke="#8b5cf6" stroke-width="1.5"/>
+                      <polygon points="130,105 152,118 158,138 144,155 116,155 102,138 108,118" fill="rgba(6, 182, 212, 0.22)" stroke="#06b6d4" stroke-width="1.3"/>
+                      <polygon points="130,95 158,138 116,155" fill="rgba(236, 72, 153, 0.18)"/>
+                      <polygon points="130,165 102,138 152,118" fill="rgba(245, 158, 11, 0.18)"/>
+
+                      <!-- Dimensional chords -->
+                      <line x1="130" y1="95" x2="130" y2="165" stroke="#a855f7" stroke-width="1.4" stroke-dasharray="2 2"/>
+                      <line x1="90" y1="140" x2="170" y2="140" stroke="#06b6d4" stroke-width="1.4" stroke-dasharray="2 2"/>
+                      <line x1="100" y1="112" x2="150" y2="165" stroke="#ec4899" stroke-width="1.2"/>
+                      <line x1="160" y1="112" x2="110" y2="165" stroke="#3b82f6" stroke-width="1.2"/>
+
+                      <!-- Nodes -->
+                      <circle cx="130" cy="95" r="3" fill="#8b5cf6"/>
+                      <circle cx="160" cy="112" r="3" fill="#06b6d4"/>
+                      <circle cx="170" cy="140" r="3" fill="#ec4899"/>
+                      <circle cx="150" cy="165" r="3" fill="#f59e0b"/>
+                      <circle cx="110" cy="165" r="3" fill="#3b82f6"/>
+                      <circle cx="90" cy="140" r="3" fill="#10b981"/>
+                      <circle cx="100" cy="112" r="3" fill="#a855f7"/>
+                      <circle cx="130" cy="135" r="3.5" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5"/>
+                    </g>
+                  </g>
+
+                  <!-- Distinct Feline Cat Staring at the Falling Stick -->
+                  <g class="cat-staring-actor">
+                    <!-- Sitting Cat Body -->
+                    <ellipse cx="255" cy="165" rx="24" ry="30" fill="#fdba74" stroke="#ea580c" stroke-width="2.5"/>
+                    <path d="M 242 152 Q 236 166 244 176 Q 252 178 250 162 Z" fill="#fff7ed"/>
+                    <!-- Long graceful cat tail wrapping around -->
+                    <path d="M 276 182 Q 295 175 288 152 Q 284 140 274 148 Q 278 160 274 172 Q 268 184 252 188" fill="#fdba74" stroke="#ea580c" stroke-width="2.5"/>
+                    
+                    <!-- Feline Head leaning forward towards stick -->
+                    <ellipse cx="230" cy="130" rx="18" ry="16" fill="#fdba74" stroke="#ea580c" stroke-width="2.5"/>
+                    <!-- Pointed triangular cat ears with pink inner fuzz -->
+                    <polygon points="218,116 212,96 228,112" fill="#fdba74" stroke="#ea580c" stroke-width="2"/>
+                    <polygon points="219,114 215,100 225,112" fill="#fbcfe8"/>
+                    <polygon points="234,114 246,98 248,118" fill="#fdba74" stroke="#ea580c" stroke-width="2"/>
+                    <polygon points="236,114 243,102 245,116" fill="#fbcfe8"/>
+                    <!-- Forehead tabby markings -->
+                    <path d="M 226 118 L 227 123 M 231 116 L 231 122 M 235 118 L 234 123" stroke="#c2410c" stroke-width="1.5" stroke-linecap="round"/>
+
+                    <!-- Wide Staring Eyes looking down at the stick -->
+                    <circle cx="222" cy="129" r="4.5" fill="#1e293b"/>
+                    <circle cx="236" cy="129" r="4.5" fill="#1e293b"/>
+                    <circle cx="220.5" cy="128" r="1.6" fill="#ffffff"/>
+                    <circle cx="234.5" cy="128" r="1.6" fill="#ffffff"/>
+                    
+                    <!-- Pink triangle nose & mouth -->
+                    <polygon points="228,134 232,134 230,136.5" fill="#f43f5e"/>
+                    <path d="M 227 137 Q 230 140 230 137 Q 230 140 233 137" fill="none" stroke="#7c2d12" stroke-width="1.4"/>
+                    
+                    <!-- Long Feline Whiskers -->
+                    <line x1="219" y1="133" x2="204" y2="131" stroke="#9a3412" stroke-width="1.3" stroke-linecap="round"/>
+                    <line x1="219" y1="136" x2="202" y2="138" stroke="#9a3412" stroke-width="1.3" stroke-linecap="round"/>
+                    <line x1="219" y1="139" x2="205" y2="144" stroke="#9a3412" stroke-width="1.3" stroke-linecap="round"/>
+                    <line x1="239" y1="133" x2="253" y2="131" stroke="#9a3412" stroke-width="1.3" stroke-linecap="round"/>
+                    <line x1="239" y1="136" x2="255" y2="138" stroke="#9a3412" stroke-width="1.3" stroke-linecap="round"/>
+                    <line x1="239" y1="139" x2="252" y2="144" stroke="#9a3412" stroke-width="1.3" stroke-linecap="round"/>
+
+                    <!-- Paws on ground staring forward -->
+                    <ellipse cx="233" cy="192" rx="7" ry="4.5" fill="#fdba74" stroke="#ea580c" stroke-width="1.5"/>
+                    <ellipse cx="249" cy="192" rx="7" ry="4.5" fill="#fdba74" stroke="#ea580c" stroke-width="1.5"/>
+                    <!-- Surprise question mark over head -->
+                    <text x="224" y="90" font-family="Caveat, cursive" font-size="20" font-weight="700" fill="#d97706">?!</text>
+                  </g>
+                </svg>
+              </div>
+              <div class="cat-panel-caption">
+                Upon measurement, the stick falls flat and the high-dimensional complexity dissolves!
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Controls: ONLY 'Replay Animation' Button as Instructed -->
+          <div class="cat-controls-single-row">
+            <button class="cute-btn primary" id="btnReplayCat">Replay Animation ↺</button>
+            <span class="stick-badge" id="stickAngleLabel">Measurement complete: State collapsed into a single outcome.</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Slide 17: Why Can't Classical Parts Do This? -->
+      <section class="slide-card" data-slide="17">
+        <div class="slide-content">
+          <span class="slide-tag amber-tag">Why Not Classical?</span>
+          <h2 class="slide-heading">Why can’t you do this state vector business with classical components?</h2>
+          
+          <p class="body-lead">
+            Like switches, transistors and stuff?
+            We have <strong>no known classical system</strong> that allows you to use a few knobs to manipulate an exponentially larger object compared to those knobs.
+            We only see this behaviour in (very delicate!) quantum systems.
+          </p>
+
+          <div class="split-doodle-box">
+            <div class="box-half public-half">
+              <span class="mini-label" style="color: #475569;">Classical Switches</span>
+              <p>5 switches ➔ 5 physical wires.</p>
+              <p style="font-size: 0.85rem; color: #64748b; margin-top: 6px;">Each knob only affects its own wire. No exponential leverage exists.</p>
+            </div>
+            <div class="vs-circle">VS</div>
+            <div class="box-half reality-half">
+              <span class="mini-label" style="color: #7c3aed;">Quantum Qubits</span>
+              <p>5 qubits ➔ 32-dimensional complex vector space.</p>
+              <p style="font-size: 0.85rem; color: #64748b; margin-top: 6px;">Each gate operation rotates the global state across the entire $2^n$ space!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 18: The Takeaway & New Mental Model -->
+      <section class="slide-card" data-slide="18">
+        <div class="slide-content">
+          <span class="slide-tag green-tag">The Takeaway</span>
+          <h2 class="slide-heading">A Much Better Mental Model</h2>
+          
+          <p class="body-lead">Instead of the “all possibilities at once” misconception, here’s a much better mental model of quantum computers:</p>
+
+          <div class="grand-manifesto-card">
+            <div class="ribbon-sparkle">⭐ ⭐ ⭐</div>
+            <blockquote class="manifesto-text">
+              “Quantum computers allow you to dial knobs to manipulate an object that is exponentially larger than the number of knobs — but you don’t see that object directly (nor would you want to — merely describing the full object could take an incredibly long time); you make a measurement to collapse that object into only one of the exponential number of possibilities; and if you’ve set up the quantum gates to manipulate qubits the way you wanted to, the measured possibility contains some or all of the information that you wanted to get out of this entire computation.”
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 19: Wrap Up & Thank You -->
+      <section class="slide-card" data-slide="19">
+        <div class="slide-content center-layout">
+          <div class="doodle-badge">🎉 The End</div>
+          <h2 class="slide-heading text-center">That’s a mouthful, but certainly a much more accurate picture of what’s going on with quantum computers!</h2>
+          
+          <div class="hero-illustration">
+            <svg class="friendly-mascot" viewBox="0 0 200 200" width="160" height="160">
+              <ellipse cx="100" cy="100" rx="80" ry="32" fill="none" stroke="#22c55e" stroke-width="3" stroke-dasharray="6 6" transform="rotate(-25 100 100)"/>
+              <ellipse cx="100" cy="100" rx="80" ry="32" fill="none" stroke="#3b82f6" stroke-width="3" stroke-dasharray="6 6" transform="rotate(25 100 100)"/>
+              <circle cx="100" cy="100" r="48" fill="#dcfce7" stroke="#16a34a" stroke-width="3.5"/>
+              <!-- Waving arm -->
+              <path d="M 145 95 Q 165 65 175 75" fill="none" stroke="#16a34a" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="86" cy="94" r="5" fill="#1e293b"/>
+              <circle cx="114" cy="94" r="5" fill="#1e293b"/>
+              <path d="M 88 108 Q 100 126 112 108" fill="none" stroke="#1e293b" stroke-width="3.5" stroke-linecap="round"/>
+              <circle cx="78" cy="104" r="6" fill="#86efac"/>
+              <circle cx="122" cy="104" r="6" fill="#86efac"/>
+              <text x="145" y="45" font-size="24" fill="#eab308">✦</text>
+              <text x="25" y="145" font-size="20" fill="#22c55e">✦</text>
+            </svg>
+          </div>
+
+          <h1 class="thank-you-text">Thank you :)</h1>
+
+          <button class="cute-btn primary restart-btn" id="btnRestart">Restart from Slide 1 ↺</button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <footer class="deck-footer">
+      <button class="nav-btn prev-btn" id="btnPrev" title="Previous Slide (←)">
+        ← Back
+      </button>
+
+      <!-- Dots Progress Indicator -->
+      <div class="dots-container" id="dotsContainer"></div>
+
+      <!-- Quick Slide Jump Button -->
+      <button class="nav-jump-btn" id="btnFooterJump" title="Browse all 19 slides (Press 'S')">
+        📑 All Slides
+      </button>
+
+      <button class="nav-btn next-btn" id="btnNext" title="Next Slide (→)">
+        Next →
+      </button>
+    </footer>
+
+  </div>
+
+  <!-- Slide Navigator Modal (Jump to Any Slide) -->
+  <div class="slide-nav-backdrop" id="slideNavBackdrop" style="display:none;">
+    <div class="slide-nav-modal">
+      <div class="slide-nav-header">
+        <div class="slide-nav-title">
+          <span class="nav-modal-icon">📑</span>
+          <div>
+            <h3>Slide Navigator</h3>
+            <span class="nav-modal-sub">Jump directly to any of the 19 slides &bull; Press <kbd>S</kbd> to toggle</span>
+          </div>
+        </div>
+        <div class="slide-nav-header-actions">
+          <input type="text" id="slideNavFilter" class="slide-filter-input" placeholder="Search slides (e.g. Bell, Grover, Cat)..." autocomplete="off" />
+          <button class="modal-close-btn" id="btnCloseSlideNav" title="Close (Esc)">×</button>
+        </div>
+      </div>
+
+      <div class="slide-nav-grid" id="slideNavGrid"></div>
+    </div>
+  </div>
+
+  <!-- Moth Quantum Engine Settings Modal -->
+  <div class="moth-modal-backdrop" id="mothModalBackdrop" style="display:none;">
+    <div class="moth-modal-card">
+      <div class="moth-modal-header">
+        <div class="moth-modal-title">
+          <span class="moth-modal-icon">🦋</span>
+          <h3>Moth Quantum Engine Settings</h3>
+        </div>
+        <button class="moth-modal-close" id="btnCloseMothModal">×</button>
+      </div>
+
+      <div class="moth-modal-body">
+        <p class="moth-modal-desc">
+          Choose where your quantum jobs execute. By default, <strong>ExplainQuantum</strong> includes an offline physics-accurate quantum simulator with realistic shot noise, but you can plug in your live Moth Atlas API key to run on Moth's Cloud Emulator or real IBM Quantum hardware!
+        </p>
+
+        <!-- Mode Selection Options -->
+        <div class="moth-mode-options">
+          <label class="moth-mode-card" id="modeCardLocal">
+            <input type="radio" name="mothEngineChoice" value="local" checked>
+            <div class="mode-info">
+              <span class="mode-title">🟡 Local Quantum Simulator</span>
+              <span class="mode-sub">Zero setup required. Runs in-browser with realistic shot noise and quantum correlations.</span>
+            </div>
+          </label>
+
+          <label class="moth-mode-card" id="modeCardEmu">
+            <input type="radio" name="mothEngineChoice" value="emu">
+            <div class="mode-info">
+              <span class="mode-title">🟢 Moth Atlas — Cloud Emulator (emu)</span>
+              <span class="mode-sub">Fast cloud execution via Aer simulator on api.mothquantum.com.</span>
+            </div>
+          </label>
+
+          <label class="moth-mode-card" id="modeCardQpu">
+            <input type="radio" name="mothEngineChoice" value="qpu">
+            <div class="mode-info">
+              <span class="mode-title">🟣 Moth Atlas — Real Quantum Hardware (qpu)</span>
+              <span class="mode-sub">Submits circuits directly to real superconducting IBM Quantum QPUs through Moth.</span>
+            </div>
+          </label>
+        </div>
+
+        <!-- API Key Input Field -->
+        <div class="moth-input-group" id="mothApiKeyGroup">
+          <label for="mothApiKeyInput" class="moth-input-label">Moth Atlas API Key:</label>
+          <input type="password" id="mothApiKeyInput" class="moth-input-field" placeholder="Enter your Moth API Key (starts with moth_...)">
+          <span class="moth-input-tip">Stored safely only in your browser's local storage. Never shared.</span>
+        </div>
+
+        <!-- Custom Base URL (Optional) -->
+        <div class="moth-input-group">
+          <label for="mothEndpointInput" class="moth-input-label">Atlas API Base URL (Optional):</label>
+          <input type="text" id="mothEndpointInput" class="moth-input-field" placeholder="https://api.mothquantum.com/api/v1">
+        </div>
+      </div>
+
+      <div class="moth-modal-footer">
+        <button class="cute-btn neutral" id="btnCancelMothModal">Cancel</button>
+        <button class="cute-btn primary" id="btnSaveMothModal">Save & Apply Settings ✓</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Scripts -->
+  <script src="js/atlas.js"></script>
+  <script src="js/wheel.js"></script>
+  <script src="js/turing.js"></script>
+  <script src="js/sat-circuit.js"></script>
+  <script src="js/quantum-snake.js"></script>
+  <script src="js/quantum-demos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
