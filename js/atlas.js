@@ -11,9 +11,19 @@
 (function(window) {
   'use strict';
 
-  const DEFAULT_BASE_URL = (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app'))
-    ? `${window.location.origin}/api/v1`
-    : 'https://api.mothquantum.com/api/v1';
+  function getDefaultEndpoint() {
+    if (typeof window === 'undefined') return 'https://api.mothquantum.com/api/v1';
+    const host = window.location.hostname;
+    const isLocal = host === 'localhost' || host === '127.0.0.1' || window.location.protocol === 'file:';
+    if (!isLocal) {
+      return `${window.location.origin}/api/v1`;
+    }
+    const cached = localStorage.getItem('explain_quantum_computing_atlas_endpoint');
+    if (cached && !cached.includes('api.mothquantum.com')) return cached;
+    return 'http://localhost:8787/api/v1';
+  }
+
+  const DEFAULT_BASE_URL = getDefaultEndpoint();
   const STORAGE_KEY_API_KEY = 'explain_quantum_computing_atlas_api_key';
   const STORAGE_KEY_ENDPOINT = 'explain_quantum_computing_atlas_endpoint';
   const STORAGE_KEY_MODE = 'explain_quantum_computing_atlas_mode';
@@ -184,7 +194,8 @@
   // Client Class
   class AtlasClient {
     constructor() {
-      this.baseUrl = localStorage.getItem(STORAGE_KEY_ENDPOINT) || DEFAULT_BASE_URL;
+      const stored = localStorage.getItem(STORAGE_KEY_ENDPOINT);
+      this.baseUrl = (stored && !stored.includes('api.mothquantum.com')) ? stored : DEFAULT_BASE_URL;
       this.apiKey = localStorage.getItem(STORAGE_KEY_API_KEY) || '';
       this.mode = localStorage.getItem(STORAGE_KEY_MODE) || 'emu'; // 'emu' or 'qpu'
       this.preferLocal = localStorage.getItem(STORAGE_KEY_PREFER_LOCAL) === 'true';
