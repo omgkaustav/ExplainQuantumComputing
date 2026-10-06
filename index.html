@@ -793,35 +793,35 @@
             </div>
 
             <div class="ket-state-display" id="ketStateDisplay">
-              $$|\psi\rangle = \frac{\sqrt{15}}{8}e^{-i\phi}(|000\rangle + |001\rangle) + \frac{3}{8}e^{+i\phi}(|010\rangle + |011\rangle) + \frac{\sqrt{5}}{8}e^{+i\phi}(|100\rangle + |101\rangle) + \frac{\sqrt{3}}{8}e^{-i\phi}(|110\rangle + |111\rangle)$$
+              $$|\psi\rangle = \frac{1}{\sqrt{8}}\left(|000\rangle + |001\rangle + |010\rangle + |011\rangle + |100\rangle + |101\rangle + |110\rangle + |111\rangle\right)$$
             </div>
 
             <!-- Normalized Amplitude-to-Probability Reference Guide -->
             <div class="ket-guide-card">
               <div class="ket-guide-title">
-                <span>✦ <strong>Graph State Amplitudes $\to$ Probabilities ($|c|^2$, with $\phi = 0.125\text{ rad} \approx 7.2^\circ$):</strong></span>
+                <span>✦ <strong>Superposition Amplitudes $\to$ Probabilities ($|c|^2$):</strong></span>
                 <span class="guide-sum-tag" id="ketGuideSumTag">Total Probability $= 100\%$ (8,192 runs)</span>
               </div>
               <div class="ket-guide-grid">
                 <div class="guide-cell">
-                  <span class="guide-state">|000⟩, |001⟩ <span class="complex-tag">-7.2°</span></span>
-                  <span class="guide-calc">$\left|\tfrac{\sqrt{15}}{8}e^{-i\phi}\right|^2 = \tfrac{15}{64}$</span>
-                  <span class="guide-pct" id="guideCellPct1">23.44% <small>(1,920 runs)</small></span>
-                </div>
-                <div class="guide-cell highlight">
-                  <span class="guide-state">|010⟩, |011⟩ <span class="complex-tag">+7.2°</span></span>
-                  <span class="guide-calc">$\left|\tfrac{3}{8}e^{+i\phi}\right|^2 = \tfrac{9}{64}$</span>
-                  <span class="guide-pct" id="guideCellPct2">14.06% <small>(1,152 runs)</small></span>
+                  <span class="guide-state">|000⟩, |001⟩</span>
+                  <span class="guide-calc">$\left|\tfrac{1}{\sqrt{8}}\right|^2 = \tfrac{1}{8}$</span>
+                  <span class="guide-pct" id="guideCellPct1">12.5% <small>(1,024 runs each)</small></span>
                 </div>
                 <div class="guide-cell">
-                  <span class="guide-state">|100⟩, |101⟩ <span class="complex-tag">+7.2°</span></span>
-                  <span class="guide-calc">$\left|\tfrac{\sqrt{5}}{8}e^{+i\phi}\right|^2 = \tfrac{5}{64}$</span>
-                  <span class="guide-pct" id="guideCellPct3">7.81% <small>(640 runs)</small></span>
+                  <span class="guide-state">|010⟩, |011⟩</span>
+                  <span class="guide-calc">$\left|\tfrac{1}{\sqrt{8}}\right|^2 = \tfrac{1}{8}$</span>
+                  <span class="guide-pct" id="guideCellPct2">12.5% <small>(1,024 runs each)</small></span>
                 </div>
                 <div class="guide-cell">
-                  <span class="guide-state">|110⟩, |111⟩ <span class="complex-tag">-7.2°</span></span>
-                  <span class="guide-calc">$\left|\tfrac{\sqrt{3}}{8}e^{-i\phi}\right|^2 = \tfrac{3}{64}$</span>
-                  <span class="guide-pct" id="guideCellPct4">4.69% <small>(384 runs)</small></span>
+                  <span class="guide-state">|100⟩, |101⟩</span>
+                  <span class="guide-calc">$\left|\tfrac{1}{\sqrt{8}}\right|^2 = \tfrac{1}{8}$</span>
+                  <span class="guide-pct" id="guideCellPct3">12.5% <small>(1,024 runs each)</small></span>
+                </div>
+                <div class="guide-cell">
+                  <span class="guide-state">|110⟩, |111⟩</span>
+                  <span class="guide-calc">$\left|\tfrac{1}{\sqrt{8}}\right|^2 = \tfrac{1}{8}$</span>
+                  <span class="guide-pct" id="guideCellPct4">12.5% <small>(1,024 runs each)</small></span>
                 </div>
               </div>
             </div>
