@@ -793,35 +793,35 @@
             </div>
 
             <div class="ket-state-display" id="ketStateDisplay">
-              $$|\psi\rangle = \frac{1}{\sqrt{8}}\left(|000\rangle + |001\rangle + |010\rangle + |011\rangle + |100\rangle + |101\rangle + |110\rangle + |111\rangle\right)$$
+              $$|\psi\rangle = \frac{1}{\sqrt{32}}\left(3|000\rangle + 3|001\rangle + \sqrt{3}|010\rangle + \sqrt{3}|011\rangle + \sqrt{3}|100\rangle + \sqrt{3}|101\rangle + |110\rangle + |111\rangle\right)$$
             </div>
 
             <!-- Normalized Amplitude-to-Probability Reference Guide -->
             <div class="ket-guide-card">
               <div class="ket-guide-title">
-                <span>✦ <strong>Superposition Amplitudes $\to$ Probabilities ($|c|^2$):</strong></span>
+                <span>✦ <strong>Varied Superposition Amplitudes $\to$ Probabilities ($|c|^2$):</strong></span>
                 <span class="guide-sum-tag" id="ketGuideSumTag">Total Probability $= 100\%$ (8,192 runs)</span>
               </div>
               <div class="ket-guide-grid">
-                <div class="guide-cell">
+                <div class="guide-cell highlight">
                   <span class="guide-state">|000⟩, |001⟩</span>
-                  <span class="guide-calc">$\left|\tfrac{1}{\sqrt{8}}\right|^2 = \tfrac{1}{8}$</span>
-                  <span class="guide-pct" id="guideCellPct1">12.5% <small>(1,024 runs each)</small></span>
+                  <span class="guide-calc">$\left|\tfrac{3}{\sqrt{32}}\right|^2 = \tfrac{9}{32}$</span>
+                  <span class="guide-pct" id="guideCellPct1">28.125% <small>(2,304 runs each)</small></span>
                 </div>
                 <div class="guide-cell">
                   <span class="guide-state">|010⟩, |011⟩</span>
-                  <span class="guide-calc">$\left|\tfrac{1}{\sqrt{8}}\right|^2 = \tfrac{1}{8}$</span>
-                  <span class="guide-pct" id="guideCellPct2">12.5% <small>(1,024 runs each)</small></span>
+                  <span class="guide-calc">$\left|\tfrac{\sqrt{3}}{\sqrt{32}}\right|^2 = \tfrac{3}{32}$</span>
+                  <span class="guide-pct" id="guideCellPct2">9.375% <small>(768 runs each)</small></span>
                 </div>
                 <div class="guide-cell">
                   <span class="guide-state">|100⟩, |101⟩</span>
-                  <span class="guide-calc">$\left|\tfrac{1}{\sqrt{8}}\right|^2 = \tfrac{1}{8}$</span>
-                  <span class="guide-pct" id="guideCellPct3">12.5% <small>(1,024 runs each)</small></span>
+                  <span class="guide-calc">$\left|\tfrac{\sqrt{3}}{\sqrt{32}}\right|^2 = \tfrac{3}{32}$</span>
+                  <span class="guide-pct" id="guideCellPct3">9.375% <small>(768 runs each)</small></span>
                 </div>
                 <div class="guide-cell">
                   <span class="guide-state">|110⟩, |111⟩</span>
-                  <span class="guide-calc">$\left|\tfrac{1}{\sqrt{8}}\right|^2 = \tfrac{1}{8}$</span>
-                  <span class="guide-pct" id="guideCellPct4">12.5% <small>(1,024 runs each)</small></span>
+                  <span class="guide-calc">$\left|\tfrac{1}{\sqrt{32}}\right|^2 = \tfrac{1}{32}$</span>
+                  <span class="guide-pct" id="guideCellPct4">3.125% <small>(256 runs each)</small></span>
                 </div>
               </div>
             </div>

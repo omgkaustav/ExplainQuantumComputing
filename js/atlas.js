@@ -40,17 +40,17 @@
     };
   }
 
-  // Slide 14 Theoretical Superposition Probabilities: 3-qubit equal superposition
-  // |ψ⟩ = 1/√8 (|000⟩ + |001⟩ + |010⟩ + |011⟩ + |100⟩ + |101⟩ + |110⟩ + |111⟩)
+  // Slide 14 Theoretical Superposition Probabilities: Varied 3-qubit state
+  // |ψ⟩ = 1/√32 ( 3|000⟩ + 3|001⟩ + √3|010⟩ + √3|011⟩ + √3|100⟩ + √3|101⟩ + |110⟩ + |111⟩ )
   const THEORETICAL_3Q_PROBS = {
-    '000': 1 / 8, // 0.125 (12.5%)
-    '001': 1 / 8, // 0.125 (12.5%)
-    '010': 1 / 8, // 0.125 (12.5%)
-    '011': 1 / 8, // 0.125 (12.5%)
-    '100': 1 / 8, // 0.125 (12.5%)
-    '101': 1 / 8, // 0.125 (12.5%)
-    '110': 1 / 8, // 0.125 (12.5%)
-    '111': 1 / 8  // 0.125 (12.5%)
+    '000': 9 / 32, // 0.28125 (28.125%)
+    '001': 9 / 32, // 0.28125 (28.125%)
+    '010': 3 / 32, // 0.09375 (9.375%)
+    '011': 3 / 32, // 0.09375 (9.375%)
+    '100': 3 / 32, // 0.09375 (9.375%)
+    '101': 3 / 32, // 0.09375 (9.375%)
+    '110': 1 / 32, // 0.03125 (3.125%)
+    '111': 1 / 32  // 0.03125 (3.125%)
   };
 
   // Classical Fidelity (Bhattacharyya coefficient) between empirical counts & theoretical state
@@ -475,8 +475,8 @@
           seed: Math.floor(Math.random() * 1000000),
           coupling_map: [[0, 1], [1, 2]],
           operations: [
-            { type: 'bloch', qubit: 0, paulis: { 'X': 1.0 } },
-            { type: 'bloch', qubit: 1, paulis: { 'X': 1.0 } },
+            { type: 'bloch', qubit: 0, paulis: { 'Z': 0.5, 'X': 0.866025 } },
+            { type: 'bloch', qubit: 1, paulis: { 'Z': 0.5, 'X': 0.866025 } },
             { type: 'bloch', qubit: 2, paulis: { 'X': 1.0 } }
           ]
         }, onProgress);

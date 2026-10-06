@@ -284,22 +284,20 @@ window.initKetCollapse = function() {
     const cell3 = document.getElementById('guideCellPct3');
     const cell4 = document.getElementById('guideCellPct4');
 
-    const runsPerState = Math.round(s / 8);
-
     if (guideSumTag) {
       guideSumTag.innerHTML = `Total Probability $= 100\%$ (${s.toLocaleString()} runs)`;
     }
     if (cell1) {
-      cell1.innerHTML = `12.5% <small>(${runsPerState.toLocaleString()} runs each)</small>`;
+      cell1.innerHTML = `28.125% <small>(${Math.round(s * (9 / 32)).toLocaleString()} runs each)</small>`;
     }
     if (cell2) {
-      cell2.innerHTML = `12.5% <small>(${runsPerState.toLocaleString()} runs each)</small>`;
+      cell2.innerHTML = `9.375% <small>(${Math.round(s * (3 / 32)).toLocaleString()} runs each)</small>`;
     }
     if (cell3) {
-      cell3.innerHTML = `12.5% <small>(${runsPerState.toLocaleString()} runs each)</small>`;
+      cell3.innerHTML = `9.375% <small>(${Math.round(s * (3 / 32)).toLocaleString()} runs each)</small>`;
     }
     if (cell4) {
-      cell4.innerHTML = `12.5% <small>(${runsPerState.toLocaleString()} runs each)</small>`;
+      cell4.innerHTML = `3.125% <small>(${Math.round(s * (1 / 32)).toLocaleString()} runs each)</small>`;
     }
   }
 
@@ -324,14 +322,14 @@ window.initKetCollapse = function() {
   }
 
   const THEORETICAL_3Q = {
-    '000': { pct: 12.5, frac: 1 / 8, amp: '1/√8' },
-    '001': { pct: 12.5, frac: 1 / 8, amp: '1/√8' },
-    '010': { pct: 12.5, frac: 1 / 8, amp: '1/√8' },
-    '011': { pct: 12.5, frac: 1 / 8, amp: '1/√8' },
-    '100': { pct: 12.5, frac: 1 / 8, amp: '1/√8' },
-    '101': { pct: 12.5, frac: 1 / 8, amp: '1/√8' },
-    '110': { pct: 12.5, frac: 1 / 8, amp: '1/√8' },
-    '111': { pct: 12.5, frac: 1 / 8, amp: '1/√8' }
+    '000': { pct: 28.125, frac: 9 / 32, amp: '3/√32' },
+    '001': { pct: 28.125, frac: 9 / 32, amp: '3/√32' },
+    '010': { pct: 9.375, frac: 3 / 32, amp: '√3/√32' },
+    '011': { pct: 9.375, frac: 3 / 32, amp: '√3/√32' },
+    '100': { pct: 9.375, frac: 3 / 32, amp: '√3/√32' },
+    '101': { pct: 9.375, frac: 3 / 32, amp: '√3/√32' },
+    '110': { pct: 3.125, frac: 1 / 32, amp: '1/√32' },
+    '111': { pct: 3.125, frac: 1 / 32, amp: '1/√32' }
   };
 
   function render8Bars(counts, shots, targetBitstring) {
