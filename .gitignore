@@ -1,19 +1,6 @@
-# Environment & Secrets (Never commit API keys!)
-.env
-*.env
-.env.local
-.env.*.local
-
-# Operating System Files
+*.DS_Store
 .DS_Store
-Thumbs.db
-
-# Dependencies & build caches
+.env
 node_modules/
-.vercel
-.cache/
 dist/
-
-# Scratch & temporary logs
 scratch/
-*.log
