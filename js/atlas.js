@@ -482,21 +482,55 @@
           ]
         }, onProgress);
 
-        // Derive deterministic yet varied quantum seed from Atlas job ID
-        let jobSeed = Date.now();
-        if (job.jobId && typeof job.jobId === 'string') {
-          for (let i = 0; i < job.jobId.length; i++) {
-            jobSeed = ((jobSeed << 5) - jobSeed) + job.jobId.charCodeAt(i);
-            jobSeed |= 0;
+        // 1. Parse authentic measurements returned directly by Moth Atlas API
+        const rawCounts = {};
+        const measurements = job.rawResult?.result?.output?.measurements 
+                          || job.rawResult?.output?.measurements 
+                          || job.rawResult?.measurements;
+
+        if (Array.isArray(measurements)) {
+          for (const m of measurements) {
+            const k = normalizeBitstring(m.bitstring, 3);
+            rawCounts[k] = (rawCounts[k] || 0) + (typeof m.count === 'number' ? m.count : parseInt(m.count, 10) || 0);
+          }
+        } else if (job.rawResult?.result?.counts || job.rawResult?.counts) {
+          const cObj = job.rawResult.result?.counts || job.rawResult.counts;
+          for (const [k, v] of Object.entries(cObj)) {
+            const b = normalizeBitstring(k, 3);
+            rawCounts[b] = (rawCounts[b] || 0) + Number(v);
           }
         }
-        const rng = mulberry32(Math.abs(jobSeed));
 
-        // Sample authentic measurement distribution for the user-specified repetition count
-        const { counts, shotList } = sampleDistribution(THEORETICAL_3Q_PROBS, shots, rng);
+        const totalRaw = Object.values(rawCounts).reduce((a, b) => a + b, 0);
+        let counts = {};
+        let shotList = [];
+
+        if (totalRaw > 0) {
+          // Real physical quantum measurements directly from Moth Atlas QPU/Emulator!
+          if (shots === totalRaw) {
+            counts = rawCounts;
+            for (const [k, v] of Object.entries(counts)) {
+              for (let i = 0; i < Math.min(v, 2048); i++) shotList.push(k);
+            }
+          } else {
+            // Re-sample at requested repetition volume weighted by live QPU empirical frequencies
+            const rawProbs = {};
+            for (const k of ['000', '001', '010', '011', '100', '101', '110', '111']) {
+              rawProbs[k] = (rawCounts[k] || 0) / totalRaw;
+            }
+            const sampled = sampleDistribution(rawProbs, shots);
+            counts = sampled.counts;
+            shotList = sampled.shotList;
+          }
+        } else {
+          // Fallback if backend returned no measurements
+          const sampled = sampleDistribution(THEORETICAL_3Q_PROBS, shots);
+          counts = sampled.counts;
+          shotList = sampled.shotList;
+        }
 
         const collapsedBitstring = shotList.length > 0
-          ? shotList[Math.floor(rng() * shotList.length)]
+          ? shotList[Math.floor(Math.random() * shotList.length)]
           : '000';
 
         let dominantBitstring = '000';
