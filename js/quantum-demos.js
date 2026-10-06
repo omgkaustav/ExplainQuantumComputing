@@ -288,16 +288,16 @@ window.initKetCollapse = function() {
       guideSumTag.innerHTML = `Total Probability $= 100\%$ (${s.toLocaleString()} runs)`;
     }
     if (cell1) {
-      cell1.innerHTML = `25.0% <small>(${Math.round(s * 0.25).toLocaleString()} runs)</small>`;
+      cell1.innerHTML = `23.44% <small>(${Math.round(s * (15 / 64)).toLocaleString()} runs)</small>`;
     }
     if (cell2) {
-      cell2.innerHTML = `12.5% <small>(${Math.round(s * 0.125).toLocaleString()} runs)</small>`;
+      cell2.innerHTML = `14.06% <small>(${Math.round(s * (9 / 64)).toLocaleString()} runs)</small>`;
     }
     if (cell3) {
-      cell3.innerHTML = `12.5% <small>(${Math.round(s * 0.125).toLocaleString()} runs)</small>`;
+      cell3.innerHTML = `7.81% <small>(${Math.round(s * (5 / 64)).toLocaleString()} runs)</small>`;
     }
     if (cell4) {
-      cell4.innerHTML = `6.25% <small>(${Math.round(s * 0.0625).toLocaleString()} runs each)</small>`;
+      cell4.innerHTML = `4.69% <small>(${Math.round(s * (3 / 64)).toLocaleString()} runs each)</small>`;
     }
   }
 
@@ -322,14 +322,14 @@ window.initKetCollapse = function() {
   }
 
   const THEORETICAL_3Q = {
-    '000': { pct: 25.0, frac: 0.25, amp: '1/2' },
-    '001': { pct: 25.0, frac: 0.25, amp: '-1/2' },
-    '010': { pct: 12.5, frac: 0.125, amp: '1/4 + 1/4i' },
-    '011': { pct: 12.5, frac: 0.125, amp: '1/√8' },
-    '100': { pct: 6.25, frac: 0.0625, amp: '1/4' },
-    '101': { pct: 6.25, frac: 0.0625, amp: '-1/4' },
-    '110': { pct: 6.25, frac: 0.0625, amp: 'i/4' },
-    '111': { pct: 6.25, frac: 0.0625, amp: '1/4' }
+    '000': { pct: 23.44, frac: 15 / 64, amp: '√15/8 e^{-iϕ}' },
+    '001': { pct: 23.44, frac: 15 / 64, amp: '√15/8 e^{-iϕ}' },
+    '010': { pct: 14.06, frac: 9 / 64, amp: '3/8 e^{+iϕ}' },
+    '011': { pct: 14.06, frac: 9 / 64, amp: '3/8 e^{+iϕ}' },
+    '100': { pct: 7.81, frac: 5 / 64, amp: '√5/8 e^{+iϕ}' },
+    '101': { pct: 7.81, frac: 5 / 64, amp: '√5/8 e^{+iϕ}' },
+    '110': { pct: 4.69, frac: 3 / 64, amp: '√3/8 e^{-iϕ}' },
+    '111': { pct: 4.69, frac: 3 / 64, amp: '√3/8 e^{-iϕ}' }
   };
 
   function render8Bars(counts, shots, targetBitstring) {
